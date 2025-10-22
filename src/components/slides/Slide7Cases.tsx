@@ -34,35 +34,15 @@ const carouselImages = [
   }
 ];
 
-const cases = [
-  {
-    city: "Mogi Mirim - SP",
-    description: "Portal cativo completo com serviços integrados ao cidadão",
-    badges: [
-      { text: "15+ serviços digitais", icon: BarChart3 },
-      { text: "LGPD compliant", icon: Shield },
-      { text: "Portal da Transparência", icon: CheckCircle2 },
-    ],
-  },
-  {
-    city: "Inclusão Digital",
-    description: "Wi-Fi público em praças, escolas e unidades de saúde",
-    badges: [
-      { text: "85% satisfação", icon: CheckCircle2 },
-      { text: "120k+ conexões/mês", icon: Wifi },
-      { text: "Cobertura ampliada", icon: MapPin },
-    ],
-  },
-  {
-    city: "Rede Metropolitana",
-    description: "Backbone de fibra conectando prédios públicos",
-    badges: [
-      { text: "99.7% uptime", icon: CheckCircle2 },
-      { text: "200+ pontos", icon: Network },
-      { text: "Latência <5ms", icon: BarChart3 },
-    ],
-  },
-];
+const portalCativo = {
+  city: "Portal Cativo",
+  description: "Solução completa para autenticação de usuários em redes Wi-Fi públicas com integração de serviços digitais municipais",
+  badges: [
+    { text: "15+ serviços digitais", icon: BarChart3 },
+    { text: "LGPD compliant", icon: Shield },
+    { text: "Portal da Transparência", icon: CheckCircle2 },
+  ],
+};
 
 const kpis = [
   { label: "Adoção", value: "85%" },
@@ -118,11 +98,11 @@ export default function Slide7Cases({ direction }: SlideProps) {
         </div>
 
         {/* Main Content - Two Columns */}
-        <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-4 overflow-hidden">
-          {/* Left Column - Carousel */}
-          <div className="flex items-center justify-center">
+        <div className="flex-1 grid grid-cols-1 lg:grid-cols-5 gap-4 lg:gap-6 overflow-hidden">
+          {/* Left Column - Carousel (maior destaque) */}
+          <div className="flex items-center justify-center lg:col-span-3">
             <div
-              className={`w-full relative rounded-xl overflow-hidden backdrop-blur-md bg-[hsl(var(--card))]/20 border-2 border-[hsl(var(--primary))]/40 transition-all duration-700 ${
+              className={`w-full relative rounded-2xl overflow-hidden backdrop-blur-xl bg-gradient-to-br from-[hsl(var(--card))]/30 to-[hsl(var(--dark-700))]/40 border-2 border-[hsl(var(--primary))]/60 shadow-[0_10px_40px_rgba(166,255,217,0.3)] transition-all duration-700 hover:shadow-[0_15px_50px_rgba(166,255,217,0.5)] hover:scale-[1.02] ${
                 isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
               }`}
               style={{ transitionDelay: "300ms" }}
@@ -199,62 +179,60 @@ export default function Slide7Cases({ direction }: SlideProps) {
             </div>
           </div>
 
-          {/* Right Column - Case Cards */}
-          <div className="space-y-2 sm:space-y-3 overflow-y-auto pr-1">
-            {cases.map((caseItem, index) => (
-              <div
-                key={index}
-                className={`group bg-gradient-to-br from-[hsl(var(--card))]/90 to-[hsl(var(--dark-700))]/90 backdrop-blur-md rounded-xl p-3 sm:p-4 md:p-5 border border-[hsl(var(--border))]/40 hover:border-[hsl(var(--primary))]/70 hover:scale-[1.02] hover:shadow-[0_8px_30px_rgba(var(--primary-rgb),0.4)] transition-all duration-500 cursor-pointer ${
-                  isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
-                }`}
-                style={{ transitionDelay: `${500 + index * 150}ms` }}
-              >
-                {/* Header */}
-                <div className="flex items-center gap-2 mb-2 pb-2 border-b border-[hsl(var(--border))]/20 transition-all duration-300 group-hover:border-[hsl(var(--primary))]/40">
-                  <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-[hsl(var(--primary))] group-hover:scale-110 transition-transform" strokeWidth={2.5} />
-                  <h3 className="text-base sm:text-lg md:text-xl font-bold text-[hsl(var(--primary))] transition-colors">
-                    {caseItem.city}
-                  </h3>
-                </div>
-
-                {/* Description */}
-                <p className="text-xs sm:text-sm text-[hsl(var(--text-secondary))] mb-3 group-hover:text-[hsl(var(--foreground))] transition-colors leading-relaxed">
-                  {caseItem.description}
-                </p>
-
-                {/* Badges */}
-                <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                  {caseItem.badges.map((badge, badgeIndex) => (
-                    <div
-                      key={badgeIndex}
-                      className="inline-flex items-center gap-1.5 px-2 sm:px-3 py-1.5 rounded-full bg-[hsl(var(--primary))]/15 border border-[hsl(var(--primary))]/40 group-hover:bg-[hsl(var(--primary))]/25 group-hover:border-[hsl(var(--primary))]/60 transition-all duration-300 hover:scale-105"
-                    >
-                      <badge.icon className="w-3 h-3 sm:w-4 sm:h-4 text-[hsl(var(--primary))]" strokeWidth={2.5} />
-                      <span className="text-xs sm:text-sm text-[hsl(var(--text-primary))] font-medium whitespace-nowrap">
-                        {badge.text}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-
-            {/* KPI Cards */}
+          {/* Right Column - Portal Cativo Card */}
+          <div className="space-y-3 overflow-y-auto pr-1 lg:col-span-2 flex flex-col">
+            {/* Portal Cativo Card com efeito glass */}
             <div
-              className={`grid grid-cols-3 gap-2 transition-all duration-700 mt-3 ${
+              className={`group backdrop-blur-xl bg-gradient-to-br from-[hsl(var(--card))]/40 via-[hsl(var(--dark-700))]/30 to-[hsl(var(--dark-800))]/40 rounded-2xl p-4 sm:p-5 md:p-6 border-2 border-[hsl(var(--primary))]/30 hover:border-[hsl(var(--primary))]/70 hover:scale-[1.02] hover:shadow-[0_10px_40px_rgba(166,255,217,0.4)] transition-all duration-500 cursor-pointer shadow-[0_4px_20px_rgba(0,0,0,0.2)] ${
+                isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
+              }`}
+              style={{ transitionDelay: "500ms" }}
+            >
+              {/* Header */}
+              <div className="flex items-center gap-3 mb-3 pb-3 border-b border-[hsl(var(--primary))]/20 transition-all duration-300 group-hover:border-[hsl(var(--primary))]/50">
+                <Wifi className="w-6 h-6 sm:w-7 sm:h-7 text-[hsl(var(--primary))] group-hover:scale-110 transition-transform" strokeWidth={2.5} />
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-[hsl(var(--primary))] transition-colors">
+                  {portalCativo.city}
+                </h3>
+              </div>
+
+              {/* Description */}
+              <p className="text-sm sm:text-base text-[hsl(var(--text-secondary))] mb-4 group-hover:text-[hsl(var(--foreground))] transition-colors leading-relaxed">
+                {portalCativo.description}
+              </p>
+
+              {/* Badges */}
+              <div className="flex flex-wrap gap-2">
+                {portalCativo.badges.map((badge, badgeIndex) => (
+                  <div
+                    key={badgeIndex}
+                    className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full backdrop-blur-md bg-[hsl(var(--primary))]/20 border border-[hsl(var(--primary))]/50 group-hover:bg-[hsl(var(--primary))]/30 group-hover:border-[hsl(var(--primary))]/70 transition-all duration-300 hover:scale-105 shadow-sm"
+                  >
+                    <badge.icon className="w-4 h-4 sm:w-5 sm:h-5 text-[hsl(var(--primary))]" strokeWidth={2.5} />
+                    <span className="text-xs sm:text-sm text-[hsl(var(--text-primary))] font-medium whitespace-nowrap">
+                      {badge.text}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* KPI Cards com efeito glass suavizado */}
+            <div
+              className={`grid grid-cols-3 gap-2 transition-all duration-700 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
-              style={{ transitionDelay: "1000ms" }}
+              style={{ transitionDelay: "700ms" }}
             >
               {kpis.map((kpi, index) => (
                 <div
                   key={index}
-                  className="backdrop-blur-md bg-gradient-to-br from-[hsl(var(--primary))]/25 to-[hsl(var(--dark-800))]/90 rounded-lg p-2 sm:p-3 text-center border border-[hsl(var(--primary))]/40 hover:scale-105 transition-transform"
+                  className="backdrop-blur-lg bg-gradient-to-br from-[hsl(var(--primary))]/20 via-[hsl(var(--card))]/30 to-[hsl(var(--dark-800))]/40 rounded-xl p-3 sm:p-4 text-center border-2 border-[hsl(var(--primary))]/30 hover:border-[hsl(var(--primary))]/60 hover:scale-105 transition-all duration-300 shadow-[0_4px_15px_rgba(0,0,0,0.15)]"
                 >
-                  <div className="text-lg sm:text-xl md:text-2xl font-bold text-[hsl(var(--primary))]">
+                  <div className="text-xl sm:text-2xl md:text-3xl font-bold text-[hsl(var(--primary))]">
                     {kpi.value}
                   </div>
-                  <div className="text-xs text-[hsl(var(--text-secondary))]">
+                  <div className="text-xs sm:text-sm text-[hsl(var(--text-secondary))] mt-1">
                     {kpi.label}
                   </div>
                 </div>
