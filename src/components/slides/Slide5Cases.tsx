@@ -53,11 +53,11 @@ export default function Slide5Cases({ direction }: SlideProps) {
   return (
     <div className="relative w-full h-full bg-[hsl(var(--background))] overflow-hidden">
       {/* Content */}
-      <div className="relative h-full flex flex-col p-6 md:p-10 lg:p-12">
+      <div className="relative h-full flex flex-col p-4 sm:p-5 md:p-8 lg:p-12">
         {/* Header */}
-        <div className="mb-6">
+        <div className="mb-4 sm:mb-5 md:mb-6">
           <h1
-            className={`text-3xl md:text-4xl lg:text-5xl font-bold text-[hsl(var(--foreground))] transition-all duration-600 ${
+            className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[hsl(var(--foreground))] transition-all duration-600 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
             }`}
           >
@@ -66,7 +66,7 @@ export default function Slide5Cases({ direction }: SlideProps) {
         </div>
 
         {/* Main Content - Two Columns */}
-        <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-6 overflow-y-auto pb-4">
+        <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 md:gap-6 overflow-y-auto pb-3 sm:pb-4">
           {/* Left Column - Featured Case with Image */}
           <div
             className={`relative rounded-xl overflow-hidden bg-gradient-to-br from-[hsl(var(--dark-800))] to-[hsl(var(--dark-700))] border border-[hsl(var(--primary))]/30 transition-all duration-700 ${
@@ -75,7 +75,7 @@ export default function Slide5Cases({ direction }: SlideProps) {
             style={{ transitionDelay: "300ms" }}
           >
             {/* Case Image */}
-            <div className="relative h-64 md:h-80 overflow-hidden">
+            <div className="relative h-48 sm:h-56 md:h-64 lg:h-80 overflow-hidden">
               <img 
                 src={wifiPortalBg}
                 alt="Portal Wi-Fi Cativo Mogi Mirim"
@@ -85,48 +85,48 @@ export default function Slide5Cases({ direction }: SlideProps) {
             </div>
 
             {/* Caption Bar */}
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--orange-500))] p-4 md:p-6">
-              <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--orange-500))] p-3 sm:p-4 md:p-6">
+              <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white mb-1 sm:mb-2">
                 Portal Cativo Inteligente
               </h3>
-              <p className="text-sm md:text-base text-white/90">
+              <p className="text-xs sm:text-sm md:text-base text-white/90">
                 Solução completa de autenticação, serviços digitais e conformidade LGPD
               </p>
             </div>
           </div>
 
           {/* Right Column - Case Cards */}
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {cases.map((caseItem, index) => (
               <div
                 key={index}
-                className={`bg-gradient-to-br from-[hsl(var(--card))] to-[hsl(var(--dark-700))] rounded-xl p-5 md:p-6 border border-[hsl(var(--border))]/30 hover:border-[hsl(var(--primary))]/50 transition-all duration-500 ${
+                className={`bg-gradient-to-br from-[hsl(var(--card))] to-[hsl(var(--dark-700))] rounded-xl p-4 sm:p-5 md:p-6 border border-[hsl(var(--border))]/30 hover:border-[hsl(var(--primary))]/50 transition-all duration-500 ${
                   isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
                 }`}
                 style={{ transitionDelay: `${450 + index * 120}ms` }}
               >
                 {/* Header */}
-                <div className="flex items-center gap-3 mb-3 pb-3 border-b border-[hsl(var(--border))]/20">
-                  <MapPin className="w-5 h-5 text-[hsl(var(--primary))]" strokeWidth={2} />
-                  <h3 className="text-lg md:text-xl font-bold text-[hsl(var(--primary))]">
+                <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3 pb-2 sm:pb-3 border-b border-[hsl(var(--border))]/20">
+                  <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-[hsl(var(--primary))]" strokeWidth={2} />
+                  <h3 className="text-base sm:text-lg md:text-xl font-bold text-[hsl(var(--primary))]">
                     {caseItem.city}
                   </h3>
                 </div>
 
                 {/* Description */}
-                <p className="text-sm md:text-base text-[hsl(var(--text-secondary))] mb-4">
+                <p className="text-xs sm:text-sm md:text-base text-[hsl(var(--text-secondary))] mb-3 sm:mb-4">
                   {caseItem.description}
                 </p>
 
                 {/* Badges */}
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1.5 sm:gap-2">
                   {caseItem.badges.map((badge, badgeIndex) => (
                     <div
                       key={badgeIndex}
-                      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[hsl(var(--primary))]/10 border border-[hsl(var(--primary))]/30"
+                      className="inline-flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full bg-[hsl(var(--primary))]/10 border border-[hsl(var(--primary))]/30"
                     >
-                      <badge.icon className="w-3.5 h-3.5 text-[hsl(var(--primary))]" strokeWidth={2} />
-                      <span className="text-xs md:text-sm text-[hsl(var(--text-primary))]">
+                      <badge.icon className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[hsl(var(--primary))]" strokeWidth={2} />
+                      <span className="text-[10px] sm:text-xs md:text-sm text-[hsl(var(--text-primary))]">
                         {badge.text}
                       </span>
                     </div>
@@ -138,10 +138,10 @@ export default function Slide5Cases({ direction }: SlideProps) {
         </div>
 
         {/* Bottom Section - KPIs and Closing */}
-        <div className="mt-6 space-y-4">
+        <div className="mt-4 sm:mt-5 md:mt-6 space-y-3 sm:space-y-4">
           {/* KPI Cards */}
           <div
-            className={`grid grid-cols-3 gap-3 md:gap-4 transition-all duration-700 ${
+            className={`grid grid-cols-3 gap-2 sm:gap-3 md:gap-4 transition-all duration-700 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
             style={{ transitionDelay: "900ms" }}
@@ -149,12 +149,12 @@ export default function Slide5Cases({ direction }: SlideProps) {
             {kpis.map((kpi, index) => (
               <div
                 key={index}
-                className="bg-gradient-to-br from-[hsl(var(--primary))]/20 to-[hsl(var(--dark-800))] rounded-lg p-4 text-center border border-[hsl(var(--primary))]/30"
+                className="bg-gradient-to-br from-[hsl(var(--primary))]/20 to-[hsl(var(--dark-800))] rounded-lg p-2 sm:p-3 md:p-4 text-center border border-[hsl(var(--primary))]/30"
               >
-                <div className="text-2xl md:text-3xl font-bold text-[hsl(var(--primary))]">
+                <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-[hsl(var(--primary))]">
                   {kpi.value}
                 </div>
-                <div className="text-xs md:text-sm text-[hsl(var(--text-secondary))] mt-1">
+                <div className="text-[10px] sm:text-xs md:text-sm text-[hsl(var(--text-secondary))] mt-0.5 sm:mt-1">
                   {kpi.label}
                 </div>
               </div>
@@ -163,16 +163,16 @@ export default function Slide5Cases({ direction }: SlideProps) {
 
           {/* Closing Message */}
           <div
-            className={`bg-gradient-to-r from-[hsl(var(--primary))]/10 via-[hsl(var(--dark-800))] to-[hsl(var(--primary))]/10 rounded-xl p-4 md:p-6 border border-[hsl(var(--primary))]/30 transition-all duration-700 ${
+            className={`bg-gradient-to-r from-[hsl(var(--primary))]/10 via-[hsl(var(--dark-800))] to-[hsl(var(--primary))]/10 rounded-xl p-3 sm:p-4 md:p-6 border border-[hsl(var(--primary))]/30 transition-all duration-700 ${
               isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
             }`}
             style={{ transitionDelay: "1100ms" }}
           >
-            <h2 className="text-lg md:text-xl font-bold text-[hsl(var(--primary))] mb-3 text-center">
+            <h2 className="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-[hsl(var(--primary))] mb-2 sm:mb-3 text-center">
               Cidades inteligentes nascem da conexão entre pessoas e propósito.
             </h2>
             
-            <p className="text-sm md:text-base text-[hsl(var(--text-primary))] leading-relaxed text-center">
+            <p className="text-xs sm:text-sm md:text-base text-[hsl(var(--text-primary))] leading-relaxed text-center">
               Prefeito, não estamos falando de tecnologia — estamos falando de legado. 
               Uma cidade que se conecta, se transforma. Uma gestão que digitaliza, deixa sua marca. 
               E um cidadão que acessa, acredita novamente em seu governo.
@@ -182,7 +182,7 @@ export default function Slide5Cases({ direction }: SlideProps) {
 
         {/* Footer */}
         <div
-          className={`flex justify-end mt-4 transition-all duration-600 ${
+          className={`flex justify-end mt-3 sm:mt-4 transition-all duration-600 ${
             isVisible ? "opacity-100" : "opacity-0"
           }`}
           style={{ transitionDelay: "1300ms" }}
@@ -190,7 +190,7 @@ export default function Slide5Cases({ direction }: SlideProps) {
           <img 
             src={logoEtherium} 
             alt="Etheriumtech" 
-            className="h-7 md:h-9 object-contain"
+            className="h-5 sm:h-6 md:h-7 lg:h-9 object-contain"
           />
         </div>
       </div>

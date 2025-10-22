@@ -44,18 +44,18 @@ export default function Slide4Impact({ direction }: SlideProps) {
   return (
     <div className="relative w-full h-full bg-[hsl(var(--background))] overflow-hidden">
       {/* Content */}
-      <div className="relative h-full flex flex-col p-8 md:p-12 lg:p-14">
+      <div className="relative h-full flex flex-col p-4 sm:p-6 md:p-10 lg:p-14">
         {/* Header */}
-        <div className="mb-6 md:mb-8">
+        <div className="mb-4 sm:mb-6 md:mb-8">
           <h1
-            className={`text-3xl md:text-4xl lg:text-5xl font-bold text-[hsl(var(--foreground))] mb-3 transition-all duration-600 ${
+            className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[hsl(var(--foreground))] mb-2 sm:mb-3 transition-all duration-600 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
             }`}
           >
             Impacto Tangível
           </h1>
           <p
-            className={`text-lg md:text-xl text-[hsl(var(--primary))] transition-all duration-600 ${
+            className={`text-sm sm:text-base md:text-lg lg:text-xl text-[hsl(var(--primary))] transition-all duration-600 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
             }`}
             style={{ transitionDelay: "150ms" }}
@@ -67,24 +67,24 @@ export default function Slide4Impact({ direction }: SlideProps) {
         {/* Main Content */}
         <div className="flex-1 flex flex-col justify-center">
           {/* Impact Table */}
-          <div className="mb-8 md:mb-12">
+          <div className="mb-6 sm:mb-8 md:mb-12">
             <div className="overflow-hidden rounded-xl border border-[hsl(var(--border))]/30 bg-gradient-to-br from-[hsl(var(--card))] to-[hsl(var(--dark-700))]">
               {impacts.map((impact, index) => (
                 <div
                   key={index}
-                  className={`flex items-center gap-4 md:gap-6 p-4 md:p-6 border-b border-[hsl(var(--border))]/20 last:border-b-0 hover:bg-[hsl(var(--primary))]/5 transition-all duration-500 ${
+                  className={`flex items-center gap-3 sm:gap-4 md:gap-6 p-3 sm:p-4 md:p-6 border-b border-[hsl(var(--border))]/20 last:border-b-0 hover:bg-[hsl(var(--primary))]/5 transition-all duration-500 ${
                     isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
                   }`}
                   style={{ transitionDelay: `${300 + index * 100}ms` }}
                 >
                   {/* Icon */}
-                  <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-[hsl(var(--primary))]/20 flex items-center justify-center">
-                    <impact.icon className="w-6 h-6 text-[hsl(var(--primary))]" strokeWidth={2} />
+                  <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-[hsl(var(--primary))]/20 flex items-center justify-center">
+                    <impact.icon className="w-5 h-5 sm:w-6 sm:h-6 text-[hsl(var(--primary))]" strokeWidth={2} />
                   </div>
 
                   {/* Dimension */}
-                  <div className="flex-shrink-0 w-32 md:w-40">
-                    <h3 className="text-base md:text-lg font-bold text-[hsl(var(--primary))]">
+                  <div className="flex-shrink-0 w-24 sm:w-28 md:w-40">
+                    <h3 className="text-sm sm:text-base md:text-lg font-bold text-[hsl(var(--primary))]">
                       {impact.dimension}
                     </h3>
                   </div>
@@ -94,7 +94,7 @@ export default function Slide4Impact({ direction }: SlideProps) {
 
                   {/* Benefit */}
                   <div className="flex-1">
-                    <p className="text-sm md:text-base text-[hsl(var(--text-secondary))] leading-relaxed">
+                    <p className="text-xs sm:text-sm md:text-base text-[hsl(var(--text-secondary))] leading-relaxed">
                       {impact.benefit}
                     </p>
                   </div>
@@ -105,22 +105,22 @@ export default function Slide4Impact({ direction }: SlideProps) {
 
           {/* Legacy Message */}
           <div
-            className={`bg-gradient-to-r from-[hsl(var(--primary))]/10 via-[hsl(var(--dark-800))] to-[hsl(var(--primary))]/10 rounded-xl p-6 md:p-8 border border-[hsl(var(--primary))]/30 transition-all duration-700 ${
+            className={`bg-gradient-to-r from-[hsl(var(--primary))]/10 via-[hsl(var(--dark-800))] to-[hsl(var(--primary))]/10 rounded-xl p-4 sm:p-5 md:p-6 lg:p-8 border border-[hsl(var(--primary))]/30 transition-all duration-700 ${
               isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
             }`}
             style={{ transitionDelay: "900ms" }}
           >
-            <h2 className="text-2xl md:text-3xl font-bold text-[hsl(var(--primary))] mb-4 text-center">
+            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-[hsl(var(--primary))] mb-3 sm:mb-4 text-center">
               De projeto técnico a legado de gestão.
             </h2>
             
-            <div className="space-y-4 text-sm md:text-base text-[hsl(var(--text-primary))] leading-relaxed">
+            <div className="space-y-3 sm:space-y-4 text-xs sm:text-sm md:text-base text-[hsl(var(--text-primary))] leading-relaxed">
               <p>
                 O senhor pode instituir o <strong className="text-[hsl(var(--primary))]">Programa Municipal de Conectividade e Governo Digital</strong>, 
                 integrando conectividade, Wi-Fi e serviços públicos em um único ecossistema.
               </p>
               
-              <p className="text-base md:text-lg">
+              <p className="text-sm sm:text-base md:text-lg">
                 É uma entrega que fica para a história: <strong className="text-[hsl(var(--primary))]">o prefeito que conectou a cidade, 
                 digitalizou a gestão e simplificou a vida das pessoas.</strong>
               </p>
@@ -130,7 +130,7 @@ export default function Slide4Impact({ direction }: SlideProps) {
 
         {/* Footer */}
         <div
-          className={`flex justify-end mt-6 transition-all duration-600 ${
+          className={`flex justify-end mt-4 sm:mt-5 md:mt-6 transition-all duration-600 ${
             isVisible ? "opacity-100" : "opacity-0"
           }`}
           style={{ transitionDelay: "1100ms" }}
@@ -138,7 +138,7 @@ export default function Slide4Impact({ direction }: SlideProps) {
           <img 
             src={logoEtherium} 
             alt="Etheriumtech" 
-            className="h-7 md:h-9 object-contain"
+            className="h-5 sm:h-6 md:h-7 lg:h-9 object-contain"
           />
         </div>
       </div>

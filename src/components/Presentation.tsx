@@ -55,8 +55,8 @@ export default function Presentation() {
   return (
     <div className="relative w-full h-screen bg-[hsl(var(--dark-900))] overflow-hidden">
       {/* Slide Container */}
-      <div className="w-full h-full flex items-center justify-center p-4 md:p-8">
-        <div className="w-full max-w-[1920px] aspect-video bg-[hsl(var(--background))] rounded-lg shadow-2xl overflow-hidden relative">
+      <div className="w-full h-full flex items-center justify-center p-2 sm:p-4 md:p-6 lg:p-8">
+        <div className="w-full h-full sm:h-auto sm:max-w-[95vw] sm:aspect-video bg-[hsl(var(--background))] sm:rounded-lg shadow-2xl overflow-hidden relative">
           <CurrentSlideComponent key={currentSlide} direction={direction} />
         </div>
       </div>
