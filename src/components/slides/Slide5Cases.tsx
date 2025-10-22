@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { MapPin, Wifi, Network, CheckCircle2, Shield, BarChart3, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import logoEtherium from "@/assets/logo-etheriumtech-white.png";
 import caseWifiPortal from "@/assets/case-wifi-portal.jpeg";
 import caseServicos1 from "@/assets/case-servicos-1.jpeg";
@@ -34,41 +34,6 @@ const carouselImages = [
   }
 ];
 
-const cases = [
-  {
-    city: "Mogi Mirim - SP",
-    description: "Portal cativo completo com serviços integrados ao cidadão",
-    badges: [
-      { text: "15+ serviços digitais", icon: BarChart3 },
-      { text: "LGPD compliant", icon: Shield },
-      { text: "Portal da Transparência", icon: CheckCircle2 },
-    ],
-  },
-  {
-    city: "Inclusão Digital",
-    description: "Wi-Fi público em praças, escolas e unidades de saúde",
-    badges: [
-      { text: "85% satisfação", icon: CheckCircle2 },
-      { text: "120k+ conexões/mês", icon: Wifi },
-      { text: "Cobertura ampliada", icon: MapPin },
-    ],
-  },
-  {
-    city: "Rede Metropolitana",
-    description: "Backbone de fibra conectando prédios públicos",
-    badges: [
-      { text: "99.7% uptime", icon: CheckCircle2 },
-      { text: "200+ pontos", icon: Network },
-      { text: "Latência <5ms", icon: BarChart3 },
-    ],
-  },
-];
-
-const kpis = [
-  { label: "Adoção", value: "85%" },
-  { label: "Usuários/mês", value: "120k+" },
-  { label: "Serviços", value: "15+" },
-];
 
 export default function Slide5Cases({ direction }: SlideProps) {
   const [isVisible, setIsVisible] = useState(false);
@@ -117,11 +82,10 @@ export default function Slide5Cases({ direction }: SlideProps) {
           </h1>
         </div>
 
-        {/* Main Content - Two Columns */}
-        <div className="flex-1 grid grid-cols-1 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-5 overflow-hidden pb-2 sm:pb-3">
-          {/* Left Column - Carousel (3 cols) */}
+        {/* Main Content - Carousel */}
+        <div className="flex-1 flex items-center justify-center overflow-hidden pb-2 sm:pb-3">
           <div
-            className={`lg:col-span-3 relative rounded-xl overflow-hidden backdrop-blur-md bg-[hsl(var(--card))]/20 border-2 border-[hsl(var(--primary))]/40 transition-all duration-700 min-h-[300px] sm:min-h-[400px] ${
+            className={`w-full max-w-5xl relative rounded-xl overflow-hidden backdrop-blur-md bg-[hsl(var(--card))]/20 border-2 border-[hsl(var(--primary))]/40 transition-all duration-700 min-h-[300px] sm:min-h-[400px] md:min-h-[500px] ${
               isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
             }`}
             style={{ transitionDelay: "300ms" }}
@@ -196,89 +160,35 @@ export default function Slide5Cases({ direction }: SlideProps) {
               </div>
             </div>
           </div>
-
-          {/* Right Column - Case Cards (2 cols) */}
-          <div className="lg:col-span-2 space-y-2 sm:space-y-3 overflow-y-auto pr-1">
-            {cases.map((caseItem, index) => (
-              <div
-                key={index}
-                className={`group bg-gradient-to-br from-[hsl(var(--card))]/90 to-[hsl(var(--dark-700))]/90 backdrop-blur-md rounded-lg p-3 sm:p-4 md:p-5 border border-[hsl(var(--border))]/40 hover:border-[hsl(var(--primary))]/70 hover:scale-[1.02] hover:shadow-[0_8px_30px_rgba(var(--primary-rgb),0.4)] transition-all duration-500 cursor-pointer ${
-                  isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
-                }`}
-                style={{ transitionDelay: `${450 + index * 120}ms` }}
-              >
-                {/* Header */}
-                <div className="flex items-center gap-2 mb-2 pb-2 border-b border-[hsl(var(--border))]/20 transition-all duration-300 group-hover:border-[hsl(var(--primary))]/40">
-                  <MapPin className="w-4 h-4 text-[hsl(var(--primary))] group-hover:scale-110 transition-transform" strokeWidth={2.5} />
-                  <h3 className="text-sm sm:text-base md:text-lg font-bold text-[hsl(var(--primary))] transition-colors">
-                    {caseItem.city}
-                  </h3>
-                </div>
-
-                {/* Description */}
-                <p className="text-xs sm:text-sm text-[hsl(var(--text-secondary))] mb-2 sm:mb-3 group-hover:text-[hsl(var(--foreground))] transition-colors leading-tight">
-                  {caseItem.description}
-                </p>
-
-                {/* Badges */}
-                <div className="flex flex-wrap gap-1.5">
-                  {caseItem.badges.map((badge, badgeIndex) => (
-                    <div
-                      key={badgeIndex}
-                      className="inline-flex items-center gap-1 sm:gap-1.5 px-2 py-1 rounded-full bg-[hsl(var(--primary))]/15 border border-[hsl(var(--primary))]/40 group-hover:bg-[hsl(var(--primary))]/25 group-hover:border-[hsl(var(--primary))]/60 transition-all duration-300 hover:scale-105"
-                    >
-                      <badge.icon className="w-3 h-3 text-[hsl(var(--primary))]" strokeWidth={2.5} />
-                      <span className="text-[9px] sm:text-[10px] md:text-xs text-[hsl(var(--text-primary))] font-medium whitespace-nowrap">
-                        {badge.text}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
 
-        {/* Bottom Section - KPIs and Closing */}
-        <div className="mt-3 sm:mt-4 space-y-2 sm:space-y-3">
-          {/* KPI Cards */}
-          <div
-            className={`grid grid-cols-3 gap-2 sm:gap-3 transition-all duration-700 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-            }`}
-            style={{ transitionDelay: "900ms" }}
-          >
-            {kpis.map((kpi, index) => (
-              <div
-                key={index}
-                className="backdrop-blur-md bg-gradient-to-br from-[hsl(var(--primary))]/25 to-[hsl(var(--dark-800))]/90 rounded-lg p-2 sm:p-3 text-center border border-[hsl(var(--primary))]/40 hover:scale-105 transition-transform"
-              >
-                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-[hsl(var(--primary))]">
-                  {kpi.value}
-                </div>
-                <div className="text-[10px] sm:text-xs text-[hsl(var(--text-secondary))] mt-0.5">
-                  {kpi.label}
-                </div>
-              </div>
-            ))}
-          </div>
-
+        {/* Bottom Section - Closing Message */}
+        <div className="mt-4 sm:mt-6 md:mt-8 space-y-3 sm:space-y-4">
           {/* Closing Message */}
           <div
-            className={`backdrop-blur-md bg-gradient-to-r from-[hsl(var(--primary))]/15 via-[hsl(var(--dark-800))]/90 to-[hsl(var(--primary))]/15 rounded-lg p-3 sm:p-4 md:p-5 border border-[hsl(var(--primary))]/40 transition-all duration-700 ${
+            className={`backdrop-blur-md bg-gradient-to-br from-[hsl(var(--dark-800))]/90 to-[hsl(var(--dark-700))]/90 rounded-2xl p-4 sm:p-6 md:p-8 lg:p-10 border border-[hsl(var(--border))]/30 transition-all duration-700 ${
               isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
             }`}
-            style={{ transitionDelay: "1100ms" }}
+            style={{ transitionDelay: "500ms" }}
           >
-            <h2 className="text-sm sm:text-base md:text-lg font-bold text-[hsl(var(--primary))] mb-2 text-center">
+            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-[hsl(var(--primary))] mb-3 sm:mb-4 md:mb-6 text-center">
               Cidades inteligentes nascem da conexão entre pessoas e propósito.
             </h2>
             
-            <p className="text-xs sm:text-sm text-[hsl(var(--text-primary))] leading-relaxed text-center">
-              Prefeito, não estamos falando de tecnologia — estamos falando de legado. 
-              Uma cidade que se conecta, se transforma. Uma gestão que digitaliza, deixa sua marca. 
-              E um cidadão que acessa, acredita novamente em seu governo.
-            </p>
+            <div className="space-y-2 sm:space-y-3 text-center">
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-[hsl(var(--text-primary))] leading-relaxed">
+                Prefeito, não estamos falando de tecnologia — estamos falando de legado.
+              </p>
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-[hsl(var(--text-primary))] leading-relaxed">
+                Uma cidade que se conecta, se transforma.
+              </p>
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-[hsl(var(--text-primary))] leading-relaxed">
+                Uma gestão que digitaliza, deixa sua marca.
+              </p>
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-[hsl(var(--text-primary))] leading-relaxed">
+                E um cidadão que acessa, acredita novamente em seu governo.
+              </p>
+            </div>
           </div>
         </div>
 
