@@ -46,6 +46,7 @@ const impacts = [
 
 export default function Slide4Impact({ direction }: SlideProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const [expandedCard, setExpandedCard] = useState<number | null>(null);
 
   useEffect(() => {
     setIsVisible(true);
@@ -81,36 +82,93 @@ export default function Slide4Impact({ direction }: SlideProps) {
             {impacts.map((impact, index) => (
               <div
                 key={index}
-                className={`group relative overflow-hidden rounded-xl transition-all duration-700 hover:scale-[1.05] hover:z-10 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] ${
-                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-                }`}
-                style={{ transitionDelay: `${300 + index * 100}ms` }}
+                onMouseEnter={() => setExpandedCard(index)}
+                onMouseLeave={() => setExpandedCard(null)}
+                className={`relative transition-all duration-700 ${
+                  expandedCard === index 
+                    ? "fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8" 
+                    : ""
+                } ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+                style={{ transitionDelay: expandedCard === index ? "0ms" : `${300 + index * 100}ms` }}
               >
-                {/* Background Image */}
-                <div 
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                  style={{ backgroundImage: `url(${impact.bgImage})` }}
-                />
-                
-                {/* Overlay suave */}
-                <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--background))]/30 via-[hsl(var(--background))]/50 to-[hsl(var(--background))]/70" />
+                {/* Backdrop overlay quando expandido */}
+                {expandedCard === index && (
+                  <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+                )}
 
-                {/* Glass Card Content */}
-                <div className="relative backdrop-blur-sm bg-[hsl(var(--card))]/10 border border-[hsl(var(--border))]/20 p-3 sm:p-4 md:p-5 h-full flex flex-col transition-all duration-500 group-hover:backdrop-blur-md group-hover:bg-[hsl(var(--card))]/20 group-hover:border-[hsl(var(--primary))]/50 group-hover:shadow-[0_0_30px_rgba(var(--primary-rgb),0.3)]">
-                  {/* Icon */}
-                  <div className="mb-2 sm:mb-3 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-xl bg-gradient-to-br from-[hsl(var(--primary))]/40 to-[hsl(var(--primary))]/20 backdrop-blur-sm border border-[hsl(var(--primary))]/40 transition-all duration-500 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(var(--primary-rgb),0.5)]">
-                    <impact.icon className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-[hsl(var(--primary))]" strokeWidth={2.5} />
+                <div className={`relative overflow-hidden rounded-xl transition-all duration-700 ${
+                  expandedCard === index 
+                    ? "w-full max-w-4xl h-auto shadow-[0_25px_80px_rgba(0,0,0,0.8)]" 
+                    : "w-full h-full hover:scale-[1.02] hover:shadow-[0_10px_30px_rgba(0,0,0,0.4)]"
+                }`}>
+                  {/* Background Image */}
+                  <div 
+                    className={`absolute inset-0 bg-cover bg-center transition-transform duration-700 ${
+                      expandedCard === index ? "scale-100" : "group-hover:scale-110"
+                    }`}
+                    style={{ backgroundImage: `url(${impact.bgImage})` }}
+                  />
+                  
+                  {/* Overlay */}
+                  <div className={`absolute inset-0 transition-all duration-500 ${
+                    expandedCard === index 
+                      ? "bg-gradient-to-b from-[hsl(var(--background))]/40 via-[hsl(var(--background))]/60 to-[hsl(var(--background))]/80"
+                      : "bg-gradient-to-b from-[hsl(var(--background))]/30 via-[hsl(var(--background))]/50 to-[hsl(var(--background))]/70"
+                  }`} />
+
+                  {/* Glass Card Content */}
+                  <div className={`relative backdrop-blur-sm bg-[hsl(var(--card))]/10 border border-[hsl(var(--border))]/20 transition-all duration-500 flex flex-col ${
+                    expandedCard === index 
+                      ? "backdrop-blur-xl bg-[hsl(var(--card))]/30 border-[hsl(var(--primary))]/60 p-6 sm:p-8 md:p-10" 
+                      : "p-3 sm:p-4 md:p-5 h-full hover:backdrop-blur-md hover:bg-[hsl(var(--card))]/20 hover:border-[hsl(var(--primary))]/50"
+                  }`}>
+                    {/* Icon */}
+                    <div className={`flex items-center justify-center rounded-xl bg-gradient-to-br from-[hsl(var(--primary))]/40 to-[hsl(var(--primary))]/20 backdrop-blur-sm border border-[hsl(var(--primary))]/40 transition-all duration-500 ${
+                      expandedCard === index 
+                        ? "w-16 h-16 sm:w-20 sm:h-20 mb-4 sm:mb-6 shadow-[0_0_30px_rgba(var(--primary-rgb),0.6)]" 
+                        : "w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 mb-2 sm:mb-3"
+                    }`}>
+                      <impact.icon className={`text-[hsl(var(--primary))] transition-all duration-500 ${
+                        expandedCard === index ? "w-8 h-8 sm:w-10 sm:h-10" : "w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7"
+                      }`} strokeWidth={2.5} />
+                    </div>
+
+                    {/* Dimension */}
+                    <h3 className={`font-bold text-[hsl(var(--primary))] drop-shadow-md transition-all duration-500 ${
+                      expandedCard === index 
+                        ? "text-2xl sm:text-3xl md:text-4xl mb-3 sm:mb-4" 
+                        : "text-sm sm:text-base md:text-lg lg:text-xl mb-2 sm:mb-3"
+                    }`}>
+                      {impact.dimension}
+                    </h3>
+
+                    {/* Benefit */}
+                    <p className={`text-[hsl(var(--foreground))] drop-shadow transition-all duration-500 ${
+                      expandedCard === index 
+                        ? "text-base sm:text-lg md:text-xl leading-relaxed mb-6 sm:mb-8" 
+                        : "text-[10px] sm:text-xs md:text-sm leading-tight sm:leading-relaxed"
+                    }`}>
+                      {impact.benefit}
+                    </p>
+
+                    {/* Dashboard - Apenas quando expandido */}
+                    {expandedCard === index && (
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 animate-fade-in">
+                        <div className="bg-gradient-to-br from-[hsl(var(--dark-800))]/80 to-[hsl(var(--dark-700))]/80 rounded-lg p-3 sm:p-4 border border-[hsl(var(--primary))]/30 backdrop-blur-sm">
+                          <div className="text-xs sm:text-sm text-[hsl(var(--text-secondary))] mb-1">Impacto</div>
+                          <div className="text-xl sm:text-2xl md:text-3xl font-bold text-[hsl(var(--primary))]">+{30 + index * 10}%</div>
+                        </div>
+                        <div className="bg-gradient-to-br from-[hsl(var(--dark-800))]/80 to-[hsl(var(--dark-700))]/80 rounded-lg p-3 sm:p-4 border border-[hsl(var(--primary))]/30 backdrop-blur-sm">
+                          <div className="text-xs sm:text-sm text-[hsl(var(--text-secondary))] mb-1">Prazo</div>
+                          <div className="text-xl sm:text-2xl md:text-3xl font-bold text-[hsl(var(--primary))]">{6 + index * 2}m</div>
+                        </div>
+                        <div className="bg-gradient-to-br from-[hsl(var(--dark-800))]/80 to-[hsl(var(--dark-700))]/80 rounded-lg p-3 sm:p-4 border border-[hsl(var(--primary))]/30 backdrop-blur-sm col-span-2 sm:col-span-1">
+                          <div className="text-xs sm:text-sm text-[hsl(var(--text-secondary))] mb-1">Status</div>
+                          <div className="text-xl sm:text-2xl md:text-3xl font-bold text-[hsl(var(--primary))]">✓ Ativo</div>
+                        </div>
+                      </div>
+                    )}
                   </div>
-
-                  {/* Dimension */}
-                  <h3 className="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-[hsl(var(--foreground))] mb-2 sm:mb-3 transition-colors duration-300 group-hover:text-[hsl(var(--primary))] drop-shadow-md">
-                    {impact.dimension}
-                  </h3>
-
-                  {/* Benefit */}
-                  <p className="text-[10px] sm:text-xs md:text-sm text-[hsl(var(--foreground))] leading-tight sm:leading-relaxed drop-shadow">
-                    {impact.benefit}
-                  </p>
                 </div>
               </div>
             ))}
