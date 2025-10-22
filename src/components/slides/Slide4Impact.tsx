@@ -81,7 +81,7 @@ export default function Slide4Impact({ direction }: SlideProps) {
             {impacts.map((impact, index) => (
               <div
                 key={index}
-                className={`group relative overflow-hidden rounded-xl transition-all duration-700 hover:scale-[1.05] hover:z-10 ${
+                className={`group relative overflow-hidden rounded-xl transition-all duration-700 hover:scale-[1.05] hover:z-10 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] ${
                   isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                 }`}
                 style={{ transitionDelay: `${300 + index * 100}ms` }}
