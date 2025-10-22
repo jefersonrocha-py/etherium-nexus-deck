@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { MapPin, Wifi, Network, CheckCircle2, Shield, BarChart3 } from "lucide-react";
 import logoEtherium from "@/assets/logo-etheriumtech-white.png";
+import wifiPortalBg from "@/assets/reference-wifi-portal.jpeg";
 
 interface SlideProps {
   direction: "next" | "prev";
@@ -73,13 +74,14 @@ export default function Slide5Cases({ direction }: SlideProps) {
             }`}
             style={{ transitionDelay: "300ms" }}
           >
-            {/* Image Placeholder */}
-            <div className="relative h-64 md:h-80 bg-[hsl(var(--dark-900))] flex items-center justify-center">
-              <div className="text-center text-[hsl(var(--muted-foreground))] p-8">
-                <p className="text-sm font-mono">[INSERIR_IMAGEM_CASE]</p>
-                <p className="text-xs mt-2">Recomendado: 1920×1080px</p>
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--background))] via-transparent to-transparent" />
+            {/* Case Image */}
+            <div className="relative h-64 md:h-80 overflow-hidden">
+              <img 
+                src={wifiPortalBg}
+                alt="Portal Wi-Fi Cativo Mogi Mirim"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--background))] via-[hsl(var(--background))]/60 to-transparent" />
             </div>
 
             {/* Caption Bar */}

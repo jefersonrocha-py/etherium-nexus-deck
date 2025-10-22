@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import logoEtherium from "@/assets/logo-etheriumtech-white.png";
+import datacenterBg from "@/assets/reference-datacenter.png";
 
 interface SlideProps {
   direction: "next" | "prev";
@@ -16,19 +17,13 @@ export default function Slide1Cover({ direction }: SlideProps) {
     <div className="relative w-full h-full bg-[hsl(var(--background))] overflow-hidden">
       {/* Hero Background with Overlay */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[hsl(var(--background))]" />
-        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--primary))]/20 via-transparent to-[hsl(var(--dark-900))]" />
-        
-        {/* Placeholder for hero image */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-10">
-          <div className="text-[hsl(var(--muted-foreground))] text-center p-8">
-            <p className="text-sm font-mono">[INSERIR_IMAGEM_FIBRA]</p>
-            <p className="text-xs mt-2">Recomendado: 1920×1080px, JPG/PNG</p>
-          </div>
-        </div>
-        
-        {/* Dark overlay */}
-        <div className="absolute inset-0 bg-[hsl(var(--background))]/70" />
+        <img 
+          src={datacenterBg}
+          alt="Data center infrastructure"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--background))]/85 via-[hsl(var(--background))]/75 to-[hsl(var(--background))]/85" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--primary))]/20 via-transparent to-transparent" />
       </div>
 
       {/* Content */}
