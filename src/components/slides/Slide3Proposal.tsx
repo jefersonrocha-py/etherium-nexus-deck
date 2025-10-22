@@ -4,6 +4,7 @@ import logoEtherium from "@/assets/logo-etheriumtech-white.png";
 import fibraOpticaBg from "@/assets/fibra-optica-bg.png";
 import wifiPublicoBg from "@/assets/wifi-publico-bg.png";
 import appMunicipalBg from "@/assets/app-municipal-bg.png";
+import solucoesIntegradas from "@/assets/solucoes-integradas-bg.png";
 
 interface SlideProps {
   direction: "next" | "prev";
@@ -56,7 +57,18 @@ export default function Slide3Proposal({ direction }: SlideProps) {
   }, []);
 
   return (
-    <div className="relative w-full h-full bg-gradient-to-br from-[hsl(var(--background))] to-[hsl(var(--dark-800))] overflow-hidden">
+    <div className="relative w-full h-full overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <img 
+          src={solucoesIntegradas}
+          alt="Soluções Integradas Background"
+          className="w-full h-full object-cover"
+        />
+        {/* Overlay bem suave */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--background))]/60 via-[hsl(var(--background))]/70 to-[hsl(var(--background))]/80" />
+      </div>
+
       {/* Content */}
       <div className="relative h-full flex flex-col p-4 sm:p-6 md:p-8 lg:p-12">
         {/* Header */}
