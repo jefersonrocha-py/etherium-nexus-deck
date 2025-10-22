@@ -10,11 +10,11 @@ import Slide6Connection from "./slides/Slide6Connection";
 
 const slides = [
   { id: 1, component: Slide1Cover },
-  { id: 2, component: Slide2Diagnosis },
-  { id: 3, component: Slide3Proposal },
-  { id: 4, component: Slide4Impact },
-  { id: 5, component: Slide5Cases },
-  { id: 6, component: Slide6Connection },
+  { id: 2, component: Slide6Connection },
+  { id: 3, component: Slide2Diagnosis },
+  { id: 4, component: Slide3Proposal },
+  { id: 5, component: Slide4Impact },
+  { id: 6, component: Slide5Cases },
 ];
 
 export default function Presentation() {
