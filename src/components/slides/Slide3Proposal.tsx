@@ -79,12 +79,12 @@ export default function Slide3Proposal({ direction }: SlideProps) {
         </div>
 
         {/* Products Grid */}
-        <div className="flex-1 overflow-y-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
+        <div className="flex-1 flex items-center">
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
             {products.map((product, index) => (
               <div
                 key={index}
-                className={`group relative overflow-hidden rounded-2xl transition-all duration-700 hover:scale-[1.02] ${
+                className={`group relative overflow-hidden rounded-xl md:rounded-2xl transition-all duration-700 hover:scale-[1.02] ${
                   isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                 }`}
                 style={{ transitionDelay: `${300 + index * 150}ms` }}
@@ -95,39 +95,39 @@ export default function Slide3Proposal({ direction }: SlideProps) {
                   style={{ backgroundImage: `url(${product.bgImage})` }}
                 />
                 
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--background))]/40 via-[hsl(var(--background))]/60 to-[hsl(var(--background))]/90" />
+                {/* Overlay mais suave */}
+                <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--background))]/20 via-[hsl(var(--background))]/30 to-[hsl(var(--background))]/50" />
 
                 {/* Glass Card Content */}
-                <div className="relative backdrop-blur-md bg-[hsl(var(--card))]/30 border border-[hsl(var(--border))]/20 p-4 sm:p-5 md:p-6 h-full flex flex-col min-h-[400px] sm:min-h-[450px] transition-all duration-500 group-hover:bg-[hsl(var(--card))]/40 group-hover:border-[hsl(var(--primary))]/40">
+                <div className="relative backdrop-blur-sm bg-[hsl(var(--card))]/10 border border-[hsl(var(--border))]/20 p-3 sm:p-4 md:p-5 lg:p-6 h-full flex flex-col transition-all duration-500 group-hover:backdrop-blur-md group-hover:bg-[hsl(var(--card))]/20 group-hover:border-[hsl(var(--primary))]/40">
                   {/* Icon */}
-                  <div className="mb-4 sm:mb-5 flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-[hsl(var(--primary))]/30 to-[hsl(var(--primary))]/10 backdrop-blur-sm border border-[hsl(var(--primary))]/30 transition-all duration-500 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(var(--primary-rgb),0.4)]">
-                    <product.icon className="w-7 h-7 sm:w-8 sm:h-8 text-[hsl(var(--primary))]" strokeWidth={2} />
+                  <div className="mb-3 sm:mb-4 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-gradient-to-br from-[hsl(var(--primary))]/40 to-[hsl(var(--primary))]/20 backdrop-blur-sm border border-[hsl(var(--primary))]/40 transition-all duration-500 group-hover:scale-110 group-hover:shadow-[0_0_25px_rgba(var(--primary-rgb),0.5)]">
+                    <product.icon className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-[hsl(var(--primary))]" strokeWidth={2.5} />
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-xl sm:text-2xl md:text-2xl font-bold text-[hsl(var(--foreground))] mb-2 transition-colors duration-300 group-hover:text-[hsl(var(--primary))]">
+                  <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-[hsl(var(--foreground))] mb-1 sm:mb-2 transition-colors duration-300 group-hover:text-[hsl(var(--primary))] drop-shadow-md">
                     {product.title}
                   </h3>
 
                   {/* Subtitle */}
-                  <p className="text-xs sm:text-sm text-[hsl(var(--primary))] mb-3 sm:mb-4 font-medium">
+                  <p className="text-[10px] sm:text-xs md:text-sm text-[hsl(var(--primary))] mb-2 sm:mb-3 font-semibold drop-shadow">
                     {product.subtitle}
                   </p>
 
                   {/* Description */}
-                  <p className="text-xs sm:text-sm text-[hsl(var(--text-secondary))] mb-4 sm:mb-5 leading-relaxed">
+                  <p className="text-[10px] sm:text-xs md:text-sm text-[hsl(var(--foreground))] mb-2 sm:mb-3 md:mb-4 leading-tight sm:leading-relaxed drop-shadow">
                     {product.description}
                   </p>
 
                   {/* Benefits */}
-                  <div className="mt-auto space-y-2 sm:space-y-3">
+                  <div className="space-y-1.5 sm:space-y-2">
                     {product.benefits.map((benefit, i) => (
                       <div 
                         key={i}
-                        className="flex items-start gap-2 sm:gap-3 text-xs sm:text-sm text-[hsl(var(--text-primary))] transition-all duration-300 group-hover:translate-x-1"
+                        className="flex items-start gap-1.5 sm:gap-2 text-[10px] sm:text-xs md:text-sm text-[hsl(var(--foreground))] transition-all duration-300 group-hover:translate-x-1 drop-shadow"
                       >
-                        <ArrowRight className="w-4 h-4 text-[hsl(var(--primary))] flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                        <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 text-[hsl(var(--primary))] flex-shrink-0 mt-0.5" strokeWidth={2.5} />
                         <span className="leading-tight">{benefit}</span>
                       </div>
                     ))}
