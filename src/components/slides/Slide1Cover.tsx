@@ -10,8 +10,10 @@ export default function Slide1Cover({ direction }: SlideProps) {
       <img 
         src={datacenterBg}
         alt="Etheriumtech"
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover object-center sm:object-center md:object-center"
       />
+      {/* Overlay sutil para melhorar legibilidade em mobile */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--background))]/10 via-transparent to-[hsl(var(--background))]/20" />
     </div>
   );
 }
