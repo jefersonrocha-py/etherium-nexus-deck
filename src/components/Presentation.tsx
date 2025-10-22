@@ -21,6 +21,13 @@ export default function Presentation() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState<"next" | "prev">("next");
   const [isFullscreen, setIsFullscreen] = useState(false);
+  
+  // Detecta se é iOS
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
+  const isInStandaloneMode = ('standalone' in window.navigator) && (window.navigator as any).standalone;
+  
+  // No iOS, fullscreen só funciona em standalone mode (PWA instalado)
+  const fullscreenSupported = !isIOS || isInStandaloneMode;
 
   const goToSlide = (index: number) => {
     setDirection(index > currentSlide ? "next" : "prev");
@@ -149,19 +156,21 @@ export default function Presentation() {
           >
             <ChevronRight className="h-5 w-5" />
           </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={toggleFullscreen}
-            className="text-foreground hover:bg-[hsl(var(--primary))]/20"
-            aria-label={isFullscreen ? "Sair do modo tela cheia" : "Entrar em tela cheia"}
-          >
-            {isFullscreen ? (
-              <Minimize className="h-5 w-5" />
-            ) : (
-              <Maximize className="h-5 w-5" />
-            )}
-          </Button>
+          {fullscreenSupported && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleFullscreen}
+              className="text-foreground hover:bg-[hsl(var(--primary))]/20"
+              aria-label={isFullscreen ? "Sair do modo tela cheia" : "Entrar em tela cheia"}
+            >
+              {isFullscreen ? (
+                <Minimize className="h-5 w-5" />
+              ) : (
+                <Maximize className="h-5 w-5" />
+              )}
+            </Button>
+          )}
         </div>
 
         {/* Progress Dots */}
