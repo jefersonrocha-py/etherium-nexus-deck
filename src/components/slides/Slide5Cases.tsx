@@ -118,41 +118,47 @@ export default function Slide5Cases({ direction }: SlideProps) {
         </div>
 
         {/* Main Content - Two Columns */}
-        <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 md:gap-6 overflow-hidden pb-3 sm:pb-4">
-          {/* Left Column - Carousel */}
+        <div className="flex-1 grid grid-cols-1 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-5 overflow-hidden pb-2 sm:pb-3">
+          {/* Left Column - Carousel (3 cols) */}
           <div
-            className={`relative rounded-2xl overflow-hidden bg-gradient-to-br from-[hsl(var(--dark-800))] to-[hsl(var(--dark-700))] border-2 border-[hsl(var(--primary))]/40 transition-all duration-700 ${
+            className={`lg:col-span-3 relative rounded-xl overflow-hidden backdrop-blur-md bg-[hsl(var(--card))]/20 border-2 border-[hsl(var(--primary))]/40 transition-all duration-700 min-h-[300px] sm:min-h-[400px] ${
               isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
             }`}
             style={{ transitionDelay: "300ms" }}
           >
             {/* Carousel Container */}
-            <div className="relative h-full">
+            <div className="relative h-full w-full">
               {/* Images */}
               {carouselImages.map((image, index) => (
                 <div
                   key={index}
-                  className={`absolute inset-0 transition-all duration-700 ${
+                  className={`absolute inset-0 transition-all duration-1000 ${
                     index === currentImage 
-                      ? "opacity-100 scale-100" 
-                      : "opacity-0 scale-95"
+                      ? "opacity-100 z-10" 
+                      : "opacity-0 z-0"
                   }`}
                 >
-                  <img 
-                    src={image.src}
-                    alt={image.title}
-                    className="absolute inset-0 w-full h-full object-contain bg-white/5"
-                  />
+                  {/* Image with proper sizing */}
+                  <div className="absolute inset-0 p-4 sm:p-6 md:p-8 flex flex-col">
+                    <div className="flex-1 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-lg overflow-hidden">
+                      <img 
+                        src={image.src}
+                        alt={image.title}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                  </div>
                   
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--background))]/90 via-transparent to-transparent" />
-                  
-                  {/* Caption */}
-                  <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 md:p-6">
-                    <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-[hsl(var(--primary))] mb-2 drop-shadow-lg animate-fade-in">
+                  {/* Caption at bottom */}
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[hsl(var(--background))]/95 via-[hsl(var(--background))]/90 to-transparent backdrop-blur-sm p-3 sm:p-4 md:p-5 border-t border-[hsl(var(--primary))]/30">
+                    <h3 className={`text-sm sm:text-base md:text-lg lg:text-xl font-bold text-[hsl(var(--primary))] mb-1 sm:mb-2 transition-all duration-500 ${
+                      index === currentImage ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+                    }`}>
                       {image.title}
                     </h3>
-                    <p className="text-sm sm:text-base text-[hsl(var(--foreground))] drop-shadow animate-fade-in" style={{ animationDelay: "200ms" }}>
+                    <p className={`text-xs sm:text-sm text-[hsl(var(--foreground))] transition-all duration-500 delay-100 ${
+                      index === currentImage ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+                    }`}>
                       {image.description}
                     </p>
                   </div>
@@ -162,28 +168,28 @@ export default function Slide5Cases({ direction }: SlideProps) {
               {/* Navigation Arrows */}
               <button
                 onClick={prevImage}
-                className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[hsl(var(--background))]/80 backdrop-blur-sm border border-[hsl(var(--primary))]/40 flex items-center justify-center hover:bg-[hsl(var(--primary))]/80 hover:scale-110 transition-all duration-300 z-10"
+                className="absolute left-2 sm:left-3 md:left-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-[hsl(var(--background))]/90 backdrop-blur-md border border-[hsl(var(--primary))]/50 flex items-center justify-center hover:bg-[hsl(var(--primary))]/90 hover:scale-110 transition-all duration-300 z-20 shadow-lg"
               >
-                <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-[hsl(var(--primary))] hover:text-white" />
+                <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-[hsl(var(--primary))] hover:text-white" strokeWidth={2.5} />
               </button>
               
               <button
                 onClick={nextImage}
-                className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[hsl(var(--background))]/80 backdrop-blur-sm border border-[hsl(var(--primary))]/40 flex items-center justify-center hover:bg-[hsl(var(--primary))]/80 hover:scale-110 transition-all duration-300 z-10"
+                className="absolute right-2 sm:right-3 md:right-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-[hsl(var(--background))]/90 backdrop-blur-md border border-[hsl(var(--primary))]/50 flex items-center justify-center hover:bg-[hsl(var(--primary))]/90 hover:scale-110 transition-all duration-300 z-20 shadow-lg"
               >
-                <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-[hsl(var(--primary))] hover:text-white" />
+                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-[hsl(var(--primary))] hover:text-white" strokeWidth={2.5} />
               </button>
 
               {/* Dots Indicator */}
-              <div className="absolute bottom-16 sm:bottom-20 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+              <div className="absolute bottom-20 sm:bottom-24 md:bottom-28 left-1/2 -translate-x-1/2 flex gap-2 z-20">
                 {carouselImages.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => setCurrentImage(index)}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    className={`h-2 rounded-full transition-all duration-300 ${
                       index === currentImage 
-                        ? "bg-[hsl(var(--primary))] w-8" 
-                        : "bg-[hsl(var(--muted-foreground))]/50 hover:bg-[hsl(var(--muted-foreground))]/70"
+                        ? "bg-[hsl(var(--primary))] w-8 shadow-[0_0_10px_rgba(var(--primary-rgb),0.6)]" 
+                        : "bg-[hsl(var(--muted-foreground))]/40 w-2 hover:bg-[hsl(var(--muted-foreground))]/60"
                     }`}
                   />
                 ))}
@@ -191,38 +197,38 @@ export default function Slide5Cases({ direction }: SlideProps) {
             </div>
           </div>
 
-          {/* Right Column - Case Cards */}
-          <div className="space-y-3 sm:space-y-4 overflow-y-auto">
+          {/* Right Column - Case Cards (2 cols) */}
+          <div className="lg:col-span-2 space-y-2 sm:space-y-3 overflow-y-auto pr-1">
             {cases.map((caseItem, index) => (
               <div
                 key={index}
-                className={`group bg-gradient-to-br from-[hsl(var(--card))]/80 to-[hsl(var(--dark-700))]/80 backdrop-blur-sm rounded-xl p-4 sm:p-5 md:p-6 border border-[hsl(var(--border))]/30 hover:border-[hsl(var(--primary))]/60 hover:scale-[1.02] hover:shadow-[0_8px_30px_rgba(var(--primary-rgb),0.3)] transition-all duration-500 cursor-pointer ${
+                className={`group bg-gradient-to-br from-[hsl(var(--card))]/90 to-[hsl(var(--dark-700))]/90 backdrop-blur-md rounded-lg p-3 sm:p-4 md:p-5 border border-[hsl(var(--border))]/40 hover:border-[hsl(var(--primary))]/70 hover:scale-[1.02] hover:shadow-[0_8px_30px_rgba(var(--primary-rgb),0.4)] transition-all duration-500 cursor-pointer ${
                   isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
                 }`}
                 style={{ transitionDelay: `${450 + index * 120}ms` }}
               >
                 {/* Header */}
-                <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3 pb-2 sm:pb-3 border-b border-[hsl(var(--border))]/20 transition-all duration-300 group-hover:border-[hsl(var(--primary))]/40">
-                  <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-[hsl(var(--primary))] group-hover:scale-110 transition-transform" strokeWidth={2} />
-                  <h3 className="text-base sm:text-lg md:text-xl font-bold text-[hsl(var(--primary))] group-hover:text-[hsl(var(--primary))] transition-colors">
+                <div className="flex items-center gap-2 mb-2 pb-2 border-b border-[hsl(var(--border))]/20 transition-all duration-300 group-hover:border-[hsl(var(--primary))]/40">
+                  <MapPin className="w-4 h-4 text-[hsl(var(--primary))] group-hover:scale-110 transition-transform" strokeWidth={2.5} />
+                  <h3 className="text-sm sm:text-base md:text-lg font-bold text-[hsl(var(--primary))] transition-colors">
                     {caseItem.city}
                   </h3>
                 </div>
 
                 {/* Description */}
-                <p className="text-xs sm:text-sm md:text-base text-[hsl(var(--text-secondary))] mb-3 sm:mb-4 group-hover:text-[hsl(var(--foreground))] transition-colors">
+                <p className="text-xs sm:text-sm text-[hsl(var(--text-secondary))] mb-2 sm:mb-3 group-hover:text-[hsl(var(--foreground))] transition-colors leading-tight">
                   {caseItem.description}
                 </p>
 
                 {/* Badges */}
-                <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                <div className="flex flex-wrap gap-1.5">
                   {caseItem.badges.map((badge, badgeIndex) => (
                     <div
                       key={badgeIndex}
-                      className="inline-flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full bg-[hsl(var(--primary))]/10 border border-[hsl(var(--primary))]/30 group-hover:bg-[hsl(var(--primary))]/20 group-hover:border-[hsl(var(--primary))]/50 transition-all duration-300 hover:scale-105"
+                      className="inline-flex items-center gap-1 sm:gap-1.5 px-2 py-1 rounded-full bg-[hsl(var(--primary))]/15 border border-[hsl(var(--primary))]/40 group-hover:bg-[hsl(var(--primary))]/25 group-hover:border-[hsl(var(--primary))]/60 transition-all duration-300 hover:scale-105"
                     >
-                      <badge.icon className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[hsl(var(--primary))]" strokeWidth={2} />
-                      <span className="text-[10px] sm:text-xs md:text-sm text-[hsl(var(--text-primary))]">
+                      <badge.icon className="w-3 h-3 text-[hsl(var(--primary))]" strokeWidth={2.5} />
+                      <span className="text-[9px] sm:text-[10px] md:text-xs text-[hsl(var(--text-primary))] font-medium whitespace-nowrap">
                         {badge.text}
                       </span>
                     </div>
@@ -234,10 +240,10 @@ export default function Slide5Cases({ direction }: SlideProps) {
         </div>
 
         {/* Bottom Section - KPIs and Closing */}
-        <div className="mt-4 sm:mt-5 md:mt-6 space-y-3 sm:space-y-4">
+        <div className="mt-3 sm:mt-4 space-y-2 sm:space-y-3">
           {/* KPI Cards */}
           <div
-            className={`grid grid-cols-3 gap-2 sm:gap-3 md:gap-4 transition-all duration-700 ${
+            className={`grid grid-cols-3 gap-2 sm:gap-3 transition-all duration-700 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
             style={{ transitionDelay: "900ms" }}
@@ -245,12 +251,12 @@ export default function Slide5Cases({ direction }: SlideProps) {
             {kpis.map((kpi, index) => (
               <div
                 key={index}
-                className="bg-gradient-to-br from-[hsl(var(--primary))]/20 to-[hsl(var(--dark-800))] rounded-lg p-2 sm:p-3 md:p-4 text-center border border-[hsl(var(--primary))]/30"
+                className="backdrop-blur-md bg-gradient-to-br from-[hsl(var(--primary))]/25 to-[hsl(var(--dark-800))]/90 rounded-lg p-2 sm:p-3 text-center border border-[hsl(var(--primary))]/40 hover:scale-105 transition-transform"
               >
-                <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-[hsl(var(--primary))]">
+                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-[hsl(var(--primary))]">
                   {kpi.value}
                 </div>
-                <div className="text-[10px] sm:text-xs md:text-sm text-[hsl(var(--text-secondary))] mt-0.5 sm:mt-1">
+                <div className="text-[10px] sm:text-xs text-[hsl(var(--text-secondary))] mt-0.5">
                   {kpi.label}
                 </div>
               </div>
@@ -259,16 +265,16 @@ export default function Slide5Cases({ direction }: SlideProps) {
 
           {/* Closing Message */}
           <div
-            className={`bg-gradient-to-r from-[hsl(var(--primary))]/10 via-[hsl(var(--dark-800))] to-[hsl(var(--primary))]/10 rounded-xl p-3 sm:p-4 md:p-6 border border-[hsl(var(--primary))]/30 transition-all duration-700 ${
+            className={`backdrop-blur-md bg-gradient-to-r from-[hsl(var(--primary))]/15 via-[hsl(var(--dark-800))]/90 to-[hsl(var(--primary))]/15 rounded-lg p-3 sm:p-4 md:p-5 border border-[hsl(var(--primary))]/40 transition-all duration-700 ${
               isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
             }`}
             style={{ transitionDelay: "1100ms" }}
           >
-            <h2 className="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-[hsl(var(--primary))] mb-2 sm:mb-3 text-center">
+            <h2 className="text-sm sm:text-base md:text-lg font-bold text-[hsl(var(--primary))] mb-2 text-center">
               Cidades inteligentes nascem da conexão entre pessoas e propósito.
             </h2>
             
-            <p className="text-xs sm:text-sm md:text-base text-[hsl(var(--text-primary))] leading-relaxed text-center">
+            <p className="text-xs sm:text-sm text-[hsl(var(--text-primary))] leading-relaxed text-center">
               Prefeito, não estamos falando de tecnologia — estamos falando de legado. 
               Uma cidade que se conecta, se transforma. Uma gestão que digitaliza, deixa sua marca. 
               E um cidadão que acessa, acredita novamente em seu governo.
