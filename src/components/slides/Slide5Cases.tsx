@@ -1,11 +1,38 @@
 import { useEffect, useState } from "react";
-import { MapPin, Wifi, Network, CheckCircle2, Shield, BarChart3 } from "lucide-react";
+import { MapPin, Wifi, Network, CheckCircle2, Shield, BarChart3, ChevronLeft, ChevronRight } from "lucide-react";
 import logoEtherium from "@/assets/logo-etheriumtech-white.png";
-import wifiPortalBg from "@/assets/reference-wifi-portal.jpeg";
+import caseWifiPortal from "@/assets/case-wifi-portal.jpeg";
+import caseServicos1 from "@/assets/case-servicos-1.jpeg";
+import caseServicos2 from "@/assets/case-servicos-2.jpeg";
+import caseServicos3 from "@/assets/case-servicos-3.jpeg";
+import casesSucessoBg from "@/assets/cases-sucesso-bg.png";
 
 interface SlideProps {
   direction: "next" | "prev";
 }
+
+const carouselImages = [
+  {
+    src: caseWifiPortal,
+    title: "Portal Wi-Fi Cativo",
+    description: "Autenticação inteligente e experiência personalizada"
+  },
+  {
+    src: caseServicos1,
+    title: "Serviços Digitais Integrados",
+    description: "Portal da Transparência, Agendamentos e Tributos"
+  },
+  {
+    src: caseServicos2,
+    title: "Plataforma Completa",
+    description: "Geoportal, Assistência Farmacêutica e Saneamento"
+  },
+  {
+    src: caseServicos3,
+    title: "Gestão Municipal Digital",
+    description: "Nota Fiscal, Multas, ICMS e Portal do Servidor"
+  }
+];
 
 const cases = [
   {
@@ -45,13 +72,38 @@ const kpis = [
 
 export default function Slide5Cases({ direction }: SlideProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const [currentImage, setCurrentImage] = useState(0);
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
 
+  const nextImage = () => {
+    setCurrentImage((prev) => (prev + 1) % carouselImages.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImage((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
+  };
+
+  useEffect(() => {
+    const interval = setInterval(nextImage, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="relative w-full h-full bg-[hsl(var(--background))] overflow-hidden">
+    <div className="relative w-full h-full overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <img 
+          src={casesSucessoBg}
+          alt="Cases de Sucesso Background"
+          className="w-full h-full object-cover"
+        />
+        {/* Overlay suave para efeito glass */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--background))]/70 via-[hsl(var(--background))]/80 to-[hsl(var(--background))]/85" />
+      </div>
+
       {/* Content */}
       <div className="relative h-full flex flex-col p-4 sm:p-5 md:p-8 lg:p-12">
         {/* Header */}
@@ -66,55 +118,99 @@ export default function Slide5Cases({ direction }: SlideProps) {
         </div>
 
         {/* Main Content - Two Columns */}
-        <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 md:gap-6 overflow-y-auto pb-3 sm:pb-4">
-          {/* Left Column - Featured Case with Image */}
+        <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 md:gap-6 overflow-hidden pb-3 sm:pb-4">
+          {/* Left Column - Carousel */}
           <div
-            className={`relative rounded-xl overflow-hidden bg-gradient-to-br from-[hsl(var(--dark-800))] to-[hsl(var(--dark-700))] border border-[hsl(var(--primary))]/30 transition-all duration-700 ${
+            className={`relative rounded-2xl overflow-hidden bg-gradient-to-br from-[hsl(var(--dark-800))] to-[hsl(var(--dark-700))] border-2 border-[hsl(var(--primary))]/40 transition-all duration-700 ${
               isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
             }`}
             style={{ transitionDelay: "300ms" }}
           >
-            {/* Case Image */}
-            <div className="relative h-48 sm:h-56 md:h-64 lg:h-80 overflow-hidden">
-              <img 
-                src={wifiPortalBg}
-                alt="Portal Wi-Fi Cativo Mogi Mirim"
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--background))] via-[hsl(var(--background))]/60 to-transparent" />
-            </div>
+            {/* Carousel Container */}
+            <div className="relative h-full">
+              {/* Images */}
+              {carouselImages.map((image, index) => (
+                <div
+                  key={index}
+                  className={`absolute inset-0 transition-all duration-700 ${
+                    index === currentImage 
+                      ? "opacity-100 scale-100" 
+                      : "opacity-0 scale-95"
+                  }`}
+                >
+                  <img 
+                    src={image.src}
+                    alt={image.title}
+                    className="absolute inset-0 w-full h-full object-contain bg-white/5"
+                  />
+                  
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--background))]/90 via-transparent to-transparent" />
+                  
+                  {/* Caption */}
+                  <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 md:p-6">
+                    <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-[hsl(var(--primary))] mb-2 drop-shadow-lg animate-fade-in">
+                      {image.title}
+                    </h3>
+                    <p className="text-sm sm:text-base text-[hsl(var(--foreground))] drop-shadow animate-fade-in" style={{ animationDelay: "200ms" }}>
+                      {image.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
 
-            {/* Caption Bar */}
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--orange-500))] p-3 sm:p-4 md:p-6">
-              <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white mb-1 sm:mb-2">
-                Portal Cativo Inteligente
-              </h3>
-              <p className="text-xs sm:text-sm md:text-base text-white/90">
-                Solução completa de autenticação, serviços digitais e conformidade LGPD
-              </p>
+              {/* Navigation Arrows */}
+              <button
+                onClick={prevImage}
+                className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[hsl(var(--background))]/80 backdrop-blur-sm border border-[hsl(var(--primary))]/40 flex items-center justify-center hover:bg-[hsl(var(--primary))]/80 hover:scale-110 transition-all duration-300 z-10"
+              >
+                <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-[hsl(var(--primary))] hover:text-white" />
+              </button>
+              
+              <button
+                onClick={nextImage}
+                className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[hsl(var(--background))]/80 backdrop-blur-sm border border-[hsl(var(--primary))]/40 flex items-center justify-center hover:bg-[hsl(var(--primary))]/80 hover:scale-110 transition-all duration-300 z-10"
+              >
+                <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-[hsl(var(--primary))] hover:text-white" />
+              </button>
+
+              {/* Dots Indicator */}
+              <div className="absolute bottom-16 sm:bottom-20 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                {carouselImages.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentImage(index)}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      index === currentImage 
+                        ? "bg-[hsl(var(--primary))] w-8" 
+                        : "bg-[hsl(var(--muted-foreground))]/50 hover:bg-[hsl(var(--muted-foreground))]/70"
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
 
           {/* Right Column - Case Cards */}
-          <div className="space-y-3 sm:space-y-4">
+          <div className="space-y-3 sm:space-y-4 overflow-y-auto">
             {cases.map((caseItem, index) => (
               <div
                 key={index}
-                className={`bg-gradient-to-br from-[hsl(var(--card))] to-[hsl(var(--dark-700))] rounded-xl p-4 sm:p-5 md:p-6 border border-[hsl(var(--border))]/30 hover:border-[hsl(var(--primary))]/50 transition-all duration-500 ${
+                className={`group bg-gradient-to-br from-[hsl(var(--card))]/80 to-[hsl(var(--dark-700))]/80 backdrop-blur-sm rounded-xl p-4 sm:p-5 md:p-6 border border-[hsl(var(--border))]/30 hover:border-[hsl(var(--primary))]/60 hover:scale-[1.02] hover:shadow-[0_8px_30px_rgba(var(--primary-rgb),0.3)] transition-all duration-500 cursor-pointer ${
                   isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
                 }`}
                 style={{ transitionDelay: `${450 + index * 120}ms` }}
               >
                 {/* Header */}
-                <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3 pb-2 sm:pb-3 border-b border-[hsl(var(--border))]/20">
-                  <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-[hsl(var(--primary))]" strokeWidth={2} />
-                  <h3 className="text-base sm:text-lg md:text-xl font-bold text-[hsl(var(--primary))]">
+                <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3 pb-2 sm:pb-3 border-b border-[hsl(var(--border))]/20 transition-all duration-300 group-hover:border-[hsl(var(--primary))]/40">
+                  <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-[hsl(var(--primary))] group-hover:scale-110 transition-transform" strokeWidth={2} />
+                  <h3 className="text-base sm:text-lg md:text-xl font-bold text-[hsl(var(--primary))] group-hover:text-[hsl(var(--primary))] transition-colors">
                     {caseItem.city}
                   </h3>
                 </div>
 
                 {/* Description */}
-                <p className="text-xs sm:text-sm md:text-base text-[hsl(var(--text-secondary))] mb-3 sm:mb-4">
+                <p className="text-xs sm:text-sm md:text-base text-[hsl(var(--text-secondary))] mb-3 sm:mb-4 group-hover:text-[hsl(var(--foreground))] transition-colors">
                   {caseItem.description}
                 </p>
 
@@ -123,7 +219,7 @@ export default function Slide5Cases({ direction }: SlideProps) {
                   {caseItem.badges.map((badge, badgeIndex) => (
                     <div
                       key={badgeIndex}
-                      className="inline-flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full bg-[hsl(var(--primary))]/10 border border-[hsl(var(--primary))]/30"
+                      className="inline-flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full bg-[hsl(var(--primary))]/10 border border-[hsl(var(--primary))]/30 group-hover:bg-[hsl(var(--primary))]/20 group-hover:border-[hsl(var(--primary))]/50 transition-all duration-300 hover:scale-105"
                     >
                       <badge.icon className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[hsl(var(--primary))]" strokeWidth={2} />
                       <span className="text-[10px] sm:text-xs md:text-sm text-[hsl(var(--text-primary))]">
