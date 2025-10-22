@@ -6,6 +6,7 @@ import administrativoBg from "@/assets/administrativo-bg.png";
 import socialBg from "@/assets/social-bg.png";
 import politicaBg from "@/assets/politica-bg.png";
 import tecnologiaBg from "@/assets/tecnologia-bg.png";
+import impactoTangivelBg from "@/assets/impacto-tangivel-bg.png";
 
 interface SlideProps {
   direction: "next" | "prev";
@@ -53,7 +54,18 @@ export default function Slide4Impact({ direction }: SlideProps) {
   }, []);
 
   return (
-    <div className="relative w-full h-full bg-gradient-to-br from-[hsl(var(--background))] to-[hsl(var(--dark-800))] overflow-hidden">
+    <div className="relative w-full h-full overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <img 
+          src={impactoTangivelBg}
+          alt="Impacto Tangível Background"
+          className="w-full h-full object-cover"
+        />
+        {/* Overlay bem suave para efeito glass */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--background))]/65 via-[hsl(var(--background))]/75 to-[hsl(var(--background))]/80" />
+      </div>
+
       {/* Content */}
       <div className="relative h-full flex flex-col p-4 sm:p-6 md:p-8 lg:p-10">
         {/* Header */}
@@ -97,10 +109,10 @@ export default function Slide4Impact({ direction }: SlideProps) {
                   />
                   
                   {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--background))]/30 via-[hsl(var(--background))]/50 to-[hsl(var(--background))]/70 hover:from-[hsl(var(--background))]/40 hover:via-[hsl(var(--background))]/60 hover:to-[hsl(var(--background))]/75 transition-all duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--background))]/20 via-[hsl(var(--background))]/35 to-[hsl(var(--background))]/50 hover:from-[hsl(var(--background))]/30 hover:via-[hsl(var(--background))]/45 hover:to-[hsl(var(--background))]/60 transition-all duration-500" />
 
                   {/* Glass Card Content */}
-                  <div className="relative backdrop-blur-sm bg-[hsl(var(--card))]/10 border border-[hsl(var(--border))]/20 p-4 sm:p-5 md:p-6 h-full flex flex-col justify-between transition-all duration-500 hover:backdrop-blur-md hover:bg-[hsl(var(--card))]/25 hover:border-[hsl(var(--primary))]/50">
+                  <div className="relative backdrop-blur-md bg-[hsl(var(--card))]/15 border border-[hsl(var(--border))]/30 p-4 sm:p-5 md:p-6 h-full flex flex-col justify-between transition-all duration-500 hover:backdrop-blur-lg hover:bg-[hsl(var(--card))]/25 hover:border-[hsl(var(--primary))]/50 hover:shadow-[0_8px_32px_rgba(var(--primary-rgb),0.2)]">
                     <div>
                       {/* Icon */}
                       <div className="mb-3 sm:mb-4 flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl bg-gradient-to-br from-[hsl(var(--primary))]/40 to-[hsl(var(--primary))]/20 backdrop-blur-sm border border-[hsl(var(--primary))]/40 transition-all duration-500 hover:scale-110 hover:shadow-[0_0_25px_rgba(var(--primary-rgb),0.6)]">
@@ -218,16 +230,13 @@ export default function Slide4Impact({ direction }: SlideProps) {
 
           {/* Legacy Card - Lateral Fixo */}
           <div
-            className={`hidden lg:flex w-80 xl:w-96 relative overflow-hidden rounded-xl transition-all duration-700 ${
+            className={`hidden lg:flex w-80 xl:w-96 relative overflow-hidden rounded-xl backdrop-blur-md bg-[hsl(var(--card))]/15 border border-[hsl(var(--primary))]/30 transition-all duration-700 hover:backdrop-blur-lg hover:bg-[hsl(var(--card))]/25 hover:border-[hsl(var(--primary))]/50 ${
               isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
             }`}
             style={{ transitionDelay: "800ms" }}
           >
-            {/* Background gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--primary))]/20 via-[hsl(var(--dark-800))] to-[hsl(var(--primary))]/10" />
-            
             {/* Glass Card Content */}
-            <div className="relative backdrop-blur-sm bg-[hsl(var(--card))]/20 border border-[hsl(var(--primary))]/30 p-5 md:p-6 flex flex-col justify-center">
+            <div className="relative p-5 md:p-6 flex flex-col justify-center">
               <h2 className="text-xl md:text-2xl font-bold text-[hsl(var(--primary))] mb-4 text-center leading-tight">
                 De projeto técnico a legado de gestão.
               </h2>
@@ -249,16 +258,13 @@ export default function Slide4Impact({ direction }: SlideProps) {
 
         {/* Legacy Card Mobile - Abaixo dos cards principais */}
         <div
-          className={`lg:hidden mt-3 sm:mt-4 relative overflow-hidden rounded-xl transition-all duration-700 ${
+          className={`lg:hidden mt-3 sm:mt-4 relative overflow-hidden rounded-xl backdrop-blur-md bg-[hsl(var(--card))]/15 border border-[hsl(var(--primary))]/30 transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
           style={{ transitionDelay: "800ms" }}
         >
-          {/* Background gradient */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--primary))]/20 via-[hsl(var(--dark-800))] to-[hsl(var(--primary))]/10" />
-          
           {/* Glass Card Content */}
-          <div className="relative backdrop-blur-sm bg-[hsl(var(--card))]/20 border border-[hsl(var(--primary))]/30 p-4 sm:p-5">
+          <div className="relative p-4 sm:p-5">
             <h2 className="text-base sm:text-lg md:text-xl font-bold text-[hsl(var(--primary))] mb-3 text-center leading-tight">
               De projeto técnico a legado de gestão.
             </h2>
