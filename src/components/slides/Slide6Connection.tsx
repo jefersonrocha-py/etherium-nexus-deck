@@ -52,7 +52,7 @@ export default function Slide6Connection({ direction }: SlideProps) {
             <div className="hidden sm:block h-[2px] w-8 md:w-16 bg-gradient-to-r from-transparent to-[hsl(var(--primary))]" />
             <Heart className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-[hsl(var(--primary))] animate-pulse flex-shrink-0" />
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-[hsl(var(--text-primary))]">
-              "Conexão é cidadania."
+              "Cidades inteligentes nascem da conexão entre pessoas e propósito."
             </h2>
             <Heart className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-[hsl(var(--primary))] animate-pulse flex-shrink-0" />
             <div className="hidden sm:block h-[2px] w-8 md:w-16 bg-gradient-to-l from-transparent to-[hsl(var(--primary))]" />
@@ -67,9 +67,9 @@ export default function Slide6Connection({ direction }: SlideProps) {
             }`}
           >
             <p className="text-base sm:text-lg md:text-2xl lg:text-3xl xl:text-4xl text-[hsl(var(--text-secondary))] leading-relaxed font-light mb-3 sm:mb-4 md:mb-6">
-              "Prefeito, o futuro de uma cidade começa com um gesto simples:{" "}
+              "Prefeito, não estamos falando de tecnologia —{" "}
               <span className="text-[hsl(var(--primary))] font-semibold">
-                conectar pessoas
+                estamos falando de legado
               </span>
               .
             </p>
@@ -84,24 +84,18 @@ export default function Slide6Connection({ direction }: SlideProps) {
             }`}
           >
             <p className="text-sm sm:text-base md:text-xl lg:text-2xl xl:text-3xl text-[hsl(var(--text-secondary))] leading-relaxed font-light">
-              Quando o senhor oferece{" "}
+              Uma cidade que{" "}
               <span className="text-[hsl(var(--primary))] font-medium">
-                Wi-Fi gratuito
-              </span>{" "}
-              em uma praça,{" "}
+                se conecta
+              </span>
+              , se transforma.
+            </p>
+            <p className="text-sm sm:text-base md:text-xl lg:text-2xl xl:text-3xl text-[hsl(var(--text-secondary))] leading-relaxed font-light mt-2 sm:mt-3 md:mt-4">
+              Uma gestão que{" "}
               <span className="text-[hsl(var(--primary))] font-medium">
-                fibra óptica
-              </span>{" "}
-              em uma escola e um{" "}
-              <span className="text-[hsl(var(--primary))] font-medium">
-                aplicativo
-              </span>{" "}
-              que coloca todos os serviços municipais na palma da mão do cidadão
-              — o senhor está{" "}
-              <span className="text-[hsl(var(--primary))] font-semibold">
-                transformando
-              </span>{" "}
-              a forma de governar.
+                digitaliza
+              </span>
+              , deixa sua marca.
             </p>
           </div>
 
@@ -114,10 +108,11 @@ export default function Slide6Connection({ direction }: SlideProps) {
             }`}
           >
             <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-[hsl(var(--text-primary))] font-semibold mt-4 sm:mt-6 md:mt-8">
-              Isso não é apenas tecnologia.
-            </p>
-            <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-[hsl(var(--primary))] font-bold mt-2 sm:mt-3 md:mt-4">
-              É inclusão, eficiência e legado.
+              E um cidadão que acessa,{" "}
+              <span className="text-[hsl(var(--primary))] font-bold">
+                acredita novamente em seu governo
+              </span>
+              .
             </p>
           </div>
         </div>
