@@ -6,6 +6,7 @@ import Slide2Diagnosis from "./slides/Slide2Diagnosis";
 import Slide3Proposal from "./slides/Slide3Proposal";
 import Slide4Impact from "./slides/Slide4Impact";
 import Slide5Cases from "./slides/Slide5Cases";
+import Slide6Connection from "./slides/Slide6Connection";
 
 const slides = [
   { id: 1, component: Slide1Cover },
@@ -13,6 +14,7 @@ const slides = [
   { id: 3, component: Slide3Proposal },
   { id: 4, component: Slide4Impact },
   { id: 5, component: Slide5Cases },
+  { id: 6, component: Slide6Connection },
 ];
 
 export default function Presentation() {
