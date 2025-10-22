@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import logoEtherium from "@/assets/logo-etheriumtech-white.png";
-import datacenterBg from "@/assets/reference-datacenter.png";
+import datacenterBg from "@/assets/datacenter-bg.png";
 
 interface SlideProps {
   direction: "next" | "prev";
@@ -15,15 +15,14 @@ export default function Slide1Cover({ direction }: SlideProps) {
 
   return (
     <div className="relative w-full h-full bg-[hsl(var(--background))] overflow-hidden">
-      {/* Hero Background with Overlay */}
+      {/* Hero Background - Full bleed */}
       <div className="absolute inset-0">
         <img 
           src={datacenterBg}
           alt="Data center infrastructure"
           className="absolute inset-0 w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--background))]/85 via-[hsl(var(--background))]/75 to-[hsl(var(--background))]/85" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--primary))]/20 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[hsl(var(--background))]/95 via-[hsl(var(--background))]/60 to-transparent" />
       </div>
 
       {/* Content */}

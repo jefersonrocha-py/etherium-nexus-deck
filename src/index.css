@@ -9,49 +9,53 @@ All colors MUST be HSL.
 @layer base {
   :root {
     /* Etheriumtech Brand Colors - HSL Format */
-    --background: 24 100% 5%;
+    --background: 100 4% 23%;
     --foreground: 0 0% 100%;
 
-    --card: 20 100% 7%;
+    --card: 177 44% 29%;
     --card-foreground: 0 0% 100%;
 
-    --popover: 20 100% 7%;
+    --popover: 100 4% 23%;
     --popover-foreground: 0 0% 100%;
 
-    --primary: 20 83% 47%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 166 100% 51%;
+    --primary-foreground: 100 4% 23%;
 
-    --secondary: 20 83% 21%;
-    --secondary-foreground: 0 0% 93%;
+    --secondary: 177 44% 29%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 20 67% 15%;
+    --muted: 177 30% 20%;
     --muted-foreground: 0 0% 93%;
 
-    --accent: 20 83% 47%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 166 100% 51%;
+    --accent-foreground: 100 4% 23%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 20 67% 29%;
-    --input: 20 67% 29%;
-    --ring: 20 83% 47%;
+    --border: 177 44% 29%;
+    --input: 177 44% 29%;
+    --ring: 166 100% 51%;
 
     --radius: 0.75rem;
 
     /* Extended Brand Palette */
-    --dark-900: 24 100% 5%;
-    --dark-800: 20 100% 7%;
-    --dark-700: 20 67% 15%;
-    --dark-600: 20 83% 21%;
-    --dark-500: 20 67% 29%;
+    --dark-900: 100 4% 23%;
+    --dark-800: 177 30% 20%;
+    --dark-700: 177 44% 29%;
+    --dark-600: 177 40% 35%;
+    --dark-500: 177 35% 40%;
     
-    --orange-600: 17 85% 31%;
-    --orange-500: 20 91% 40%;
-    --orange-400: 20 83% 47%;
+    --cyan-600: 166 90% 45%;
+    --cyan-500: 166 100% 51%;
+    --cyan-400: 166 100% 60%;
     
     --text-primary: 0 0% 100%;
     --text-secondary: 0 0% 93%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(177, 44%, 29%), hsl(166, 100%, 51%));
+    --gradient-secondary: linear-gradient(180deg, hsl(100, 4%, 23%), hsl(177, 44%, 29%));
 
     /* Transitions & Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
