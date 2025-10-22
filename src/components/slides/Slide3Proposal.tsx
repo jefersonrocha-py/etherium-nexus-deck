@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { Cable, Wifi, Smartphone, TrendingUp } from "lucide-react";
+import { Cable, Wifi, Smartphone, TrendingUp, Users, Clock, CheckCircle2, Zap, BarChart3, Activity } from "lucide-react";
 import logoEtherium from "@/assets/logo-etheriumtech-white.png";
+import governoBg from "@/assets/governo-digital-bg.png";
 
 interface SlideProps {
   direction: "next" | "prev";
@@ -40,7 +41,13 @@ const proposals = [
 
 export default function Slide3Proposal({ direction }: SlideProps) {
   const [isVisible, setIsVisible] = useState(false);
-  const [stats] = useState({ availability: 99.7, activeUsers: 15000 });
+  const [stats] = useState({ 
+    availability: 99.7, 
+    activeUsers: 15000,
+    responseTime: 0.8,
+    satisfaction: 94,
+    monthlyGrowth: 12
+  });
 
   useEffect(() => {
     setIsVisible(true);
@@ -48,6 +55,16 @@ export default function Slide3Proposal({ direction }: SlideProps) {
 
   return (
     <div className="relative w-full h-full bg-[hsl(var(--background))] overflow-hidden">
+      {/* Background Image with Subtle Overlay */}
+      <div className="absolute inset-0">
+        <img 
+          src={governoBg}
+          alt="Governo Digital"
+          className="absolute inset-0 w-full h-full object-cover opacity-20"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--background))]/85 via-[hsl(var(--background))]/75 to-[hsl(var(--background))]/90" />
+      </div>
+
       {/* Content */}
       <div className="relative h-full flex flex-col p-4 sm:p-6 md:p-8 lg:p-12">
         {/* Header */}
@@ -103,25 +120,59 @@ export default function Slide3Proposal({ direction }: SlideProps) {
                   ))}
                 </ul>
 
-                {/* Mini Dashboard for third card */}
+                {/* Enhanced Dashboard for third card */}
                 {index === 2 && (
                   <div
-                    className={`mt-4 sm:mt-5 md:mt-6 pt-4 sm:pt-5 md:pt-6 border-t border-[hsl(var(--border))]/20 grid grid-cols-2 gap-2 sm:gap-3 transition-all duration-700 ${
+                    className={`mt-4 sm:mt-5 md:mt-6 pt-4 sm:pt-5 md:pt-6 border-t border-[hsl(var(--border))]/20 space-y-2 sm:space-y-3 transition-all duration-700 ${
                       isVisible ? "opacity-100" : "opacity-0"
                     }`}
                     style={{ transitionDelay: "1000ms" }}
                   >
-                    <div className="bg-[hsl(var(--dark-800))] rounded-lg p-2 sm:p-3 text-center">
-                      <div className="text-lg sm:text-xl md:text-2xl font-bold text-[hsl(var(--primary))]">
-                        {stats.availability}%
+                    {/* First Row - 2 columns */}
+                    <div className="grid grid-cols-2 gap-2 sm:gap-3">
+                      <div className="bg-gradient-to-br from-[hsl(var(--dark-800))] to-[hsl(var(--dark-700))] rounded-lg p-2 sm:p-3 border border-[hsl(var(--primary))]/20 hover:border-[hsl(var(--primary))]/50 transition-all group">
+                        <div className="flex items-center gap-1.5 sm:gap-2 mb-1">
+                          <CheckCircle2 className="w-3 h-3 sm:w-4 sm:h-4 text-[hsl(var(--primary))] group-hover:scale-110 transition-transform" />
+                          <span className="text-[10px] sm:text-xs text-[hsl(var(--text-secondary))]">Disponibilidade</span>
+                        </div>
+                        <div className="text-lg sm:text-xl md:text-2xl font-bold text-[hsl(var(--primary))] group-hover:scale-105 transition-transform">
+                          {stats.availability}%
+                        </div>
                       </div>
-                      <div className="text-[10px] sm:text-xs text-[hsl(var(--text-secondary))] mt-0.5 sm:mt-1">Disponibilidade</div>
+                      <div className="bg-gradient-to-br from-[hsl(var(--dark-800))] to-[hsl(var(--dark-700))] rounded-lg p-2 sm:p-3 border border-[hsl(var(--primary))]/20 hover:border-[hsl(var(--primary))]/50 transition-all group">
+                        <div className="flex items-center gap-1.5 sm:gap-2 mb-1">
+                          <Users className="w-3 h-3 sm:w-4 sm:h-4 text-[hsl(var(--primary))] group-hover:scale-110 transition-transform" />
+                          <span className="text-[10px] sm:text-xs text-[hsl(var(--text-secondary))]">Usuários Ativos</span>
+                        </div>
+                        <div className="text-lg sm:text-xl md:text-2xl font-bold text-[hsl(var(--primary))] group-hover:scale-105 transition-transform">
+                          {(stats.activeUsers / 1000).toFixed(0)}k+
+                        </div>
+                      </div>
                     </div>
-                    <div className="bg-[hsl(var(--dark-800))] rounded-lg p-2 sm:p-3 text-center">
-                      <div className="text-lg sm:text-xl md:text-2xl font-bold text-[hsl(var(--primary))]">
-                        {(stats.activeUsers / 1000).toFixed(0)}k+
+                    
+                    {/* Second Row - 3 columns */}
+                    <div className="grid grid-cols-3 gap-2 sm:gap-3">
+                      <div className="bg-gradient-to-br from-[hsl(var(--dark-800))] to-[hsl(var(--dark-700))] rounded-lg p-2 sm:p-3 border border-[hsl(var(--primary))]/20 hover:border-[hsl(var(--primary))]/50 transition-all group text-center">
+                        <Zap className="w-3 h-3 sm:w-4 sm:h-4 text-[hsl(var(--primary))] mx-auto mb-1 group-hover:scale-110 transition-transform" />
+                        <div className="text-base sm:text-lg md:text-xl font-bold text-[hsl(var(--primary))] group-hover:scale-105 transition-transform">
+                          {stats.responseTime}s
+                        </div>
+                        <div className="text-[9px] sm:text-[10px] text-[hsl(var(--text-secondary))] mt-0.5">Resposta</div>
                       </div>
-                      <div className="text-[10px] sm:text-xs text-[hsl(var(--text-secondary))] mt-0.5 sm:mt-1">Ativos</div>
+                      <div className="bg-gradient-to-br from-[hsl(var(--dark-800))] to-[hsl(var(--dark-700))] rounded-lg p-2 sm:p-3 border border-[hsl(var(--primary))]/20 hover:border-[hsl(var(--primary))]/50 transition-all group text-center">
+                        <Activity className="w-3 h-3 sm:w-4 sm:h-4 text-[hsl(var(--primary))] mx-auto mb-1 group-hover:scale-110 transition-transform" />
+                        <div className="text-base sm:text-lg md:text-xl font-bold text-[hsl(var(--primary))] group-hover:scale-105 transition-transform">
+                          {stats.satisfaction}%
+                        </div>
+                        <div className="text-[9px] sm:text-[10px] text-[hsl(var(--text-secondary))] mt-0.5">Satisfação</div>
+                      </div>
+                      <div className="bg-gradient-to-br from-[hsl(var(--dark-800))] to-[hsl(var(--dark-700))] rounded-lg p-2 sm:p-3 border border-[hsl(var(--primary))]/20 hover:border-[hsl(var(--primary))]/50 transition-all group text-center">
+                        <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 text-[hsl(var(--primary))] mx-auto mb-1 group-hover:scale-110 transition-transform" />
+                        <div className="text-base sm:text-lg md:text-xl font-bold text-[hsl(var(--primary))] group-hover:scale-105 transition-transform">
+                          +{stats.monthlyGrowth}%
+                        </div>
+                        <div className="text-[9px] sm:text-[10px] text-[hsl(var(--text-secondary))] mt-0.5">Crescimento</div>
+                      </div>
                     </div>
                   </div>
                 )}
