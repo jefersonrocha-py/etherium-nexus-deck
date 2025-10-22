@@ -85,7 +85,7 @@ export default function Slide4Impact({ direction }: SlideProps) {
                 <div
                   key={index}
                   onMouseEnter={() => setExpandedCard(index)}
-                  className={`relative overflow-hidden rounded-xl transition-all duration-500 cursor-pointer ${
+                  className={`relative overflow-hidden rounded-xl transition-all duration-500 cursor-pointer min-h-[180px] sm:min-h-[200px] md:min-h-[220px] ${
                     expandedCard === index ? "invisible" : "hover:scale-[1.03] hover:shadow-[0_10px_40px_rgba(0,0,0,0.4)]"
                   } ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
                   style={{ transitionDelay: `${300 + index * 100}ms` }}
@@ -97,22 +97,24 @@ export default function Slide4Impact({ direction }: SlideProps) {
                   />
                   
                   {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--background))]/30 via-[hsl(var(--background))]/50 to-[hsl(var(--background))]/70" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--background))]/30 via-[hsl(var(--background))]/50 to-[hsl(var(--background))]/70 hover:from-[hsl(var(--background))]/40 hover:via-[hsl(var(--background))]/60 hover:to-[hsl(var(--background))]/75 transition-all duration-500" />
 
                   {/* Glass Card Content */}
-                  <div className="relative backdrop-blur-sm bg-[hsl(var(--card))]/10 border border-[hsl(var(--border))]/20 p-3 sm:p-4 md:p-5 h-full flex flex-col transition-all duration-500 hover:backdrop-blur-md hover:bg-[hsl(var(--card))]/20 hover:border-[hsl(var(--primary))]/50">
-                    {/* Icon */}
-                    <div className="mb-2 sm:mb-3 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-xl bg-gradient-to-br from-[hsl(var(--primary))]/40 to-[hsl(var(--primary))]/20 backdrop-blur-sm border border-[hsl(var(--primary))]/40 transition-all duration-500">
-                      <impact.icon className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-[hsl(var(--primary))]" strokeWidth={2.5} />
+                  <div className="relative backdrop-blur-sm bg-[hsl(var(--card))]/10 border border-[hsl(var(--border))]/20 p-4 sm:p-5 md:p-6 h-full flex flex-col justify-between transition-all duration-500 hover:backdrop-blur-md hover:bg-[hsl(var(--card))]/25 hover:border-[hsl(var(--primary))]/50">
+                    <div>
+                      {/* Icon */}
+                      <div className="mb-3 sm:mb-4 flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl bg-gradient-to-br from-[hsl(var(--primary))]/40 to-[hsl(var(--primary))]/20 backdrop-blur-sm border border-[hsl(var(--primary))]/40 transition-all duration-500 hover:scale-110 hover:shadow-[0_0_25px_rgba(var(--primary-rgb),0.6)]">
+                        <impact.icon className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-[hsl(var(--primary))]" strokeWidth={2.5} />
+                      </div>
+
+                      {/* Dimension */}
+                      <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-[hsl(var(--foreground))] mb-2 sm:mb-3 drop-shadow-md transition-colors duration-300 hover:text-[hsl(var(--primary))]">
+                        {impact.dimension}
+                      </h3>
                     </div>
 
-                    {/* Dimension */}
-                    <h3 className="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-[hsl(var(--foreground))] mb-2 sm:mb-3 drop-shadow-md">
-                      {impact.dimension}
-                    </h3>
-
                     {/* Benefit */}
-                    <p className="text-[10px] sm:text-xs md:text-sm text-[hsl(var(--foreground))] leading-tight sm:leading-relaxed drop-shadow">
+                    <p className="text-xs sm:text-sm md:text-base text-[hsl(var(--foreground))] leading-relaxed drop-shadow">
                       {impact.benefit}
                     </p>
                   </div>
