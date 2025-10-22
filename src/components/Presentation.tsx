@@ -43,11 +43,40 @@ export default function Presentation() {
 
   const toggleFullscreen = async () => {
     try {
-      if (!document.fullscreenElement) {
-        await document.documentElement.requestFullscreen();
+      const docElement = document.documentElement as any;
+      
+      // Verifica se já está em fullscreen
+      const isInFullscreen = 
+        document.fullscreenElement || 
+        docElement.webkitFullscreenElement || 
+        docElement.mozFullScreenElement ||
+        docElement.msFullscreenElement;
+
+      if (!isInFullscreen) {
+        // Tenta entrar em fullscreen com suporte para diferentes navegadores
+        if (docElement.requestFullscreen) {
+          await docElement.requestFullscreen();
+        } else if (docElement.webkitRequestFullscreen) {
+          await docElement.webkitRequestFullscreen();
+        } else if (docElement.webkitEnterFullscreen) {
+          await docElement.webkitEnterFullscreen();
+        } else if (docElement.mozRequestFullScreen) {
+          await docElement.mozRequestFullScreen();
+        } else if (docElement.msRequestFullscreen) {
+          await docElement.msRequestFullscreen();
+        }
         setIsFullscreen(true);
       } else {
-        await document.exitFullscreen();
+        // Tenta sair do fullscreen
+        if (document.exitFullscreen) {
+          await document.exitFullscreen();
+        } else if (docElement.webkitExitFullscreen) {
+          await docElement.webkitExitFullscreen();
+        } else if (docElement.mozCancelFullScreen) {
+          await docElement.mozCancelFullScreen();
+        } else if (docElement.msExitFullscreen) {
+          await docElement.msExitFullscreen();
+        }
         setIsFullscreen(false);
       }
     } catch (error) {
@@ -63,15 +92,27 @@ export default function Presentation() {
     };
 
     const handleFullscreenChange = () => {
-      setIsFullscreen(!!document.fullscreenElement);
+      const docElement = document.documentElement as any;
+      const isInFullscreen = 
+        document.fullscreenElement || 
+        docElement.webkitFullscreenElement || 
+        docElement.mozFullScreenElement ||
+        docElement.msFullscreenElement;
+      setIsFullscreen(!!isInFullscreen);
     };
 
     window.addEventListener("keydown", handleKeyDown);
     document.addEventListener("fullscreenchange", handleFullscreenChange);
+    document.addEventListener("webkitfullscreenchange", handleFullscreenChange);
+    document.addEventListener("mozfullscreenchange", handleFullscreenChange);
+    document.addEventListener("MSFullscreenChange", handleFullscreenChange);
     
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       document.removeEventListener("fullscreenchange", handleFullscreenChange);
+      document.removeEventListener("webkitfullscreenchange", handleFullscreenChange);
+      document.removeEventListener("mozfullscreenchange", handleFullscreenChange);
+      document.removeEventListener("MSFullscreenChange", handleFullscreenChange);
     };
   }, [currentSlide]);
 
