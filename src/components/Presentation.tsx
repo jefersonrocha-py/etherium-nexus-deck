@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, Maximize, Minimize } from "lucide-react";
+import { ChevronLeft, ChevronRight, Maximize, Minimize, Download, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { usePdfExport } from "@/hooks/use-pdf-export";
 import Slide1Cover from "./slides/Slide1Cover";
 import Slide2Diagnosis from "./slides/Slide2Diagnosis";
 import Slide3Proposal from "./slides/Slide3Proposal";
@@ -21,6 +22,7 @@ export default function Presentation() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState<"next" | "prev">("next");
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const { exportPdf, isExporting } = usePdfExport(slides);
   
   // Detecta se é iOS
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
@@ -171,6 +173,20 @@ export default function Presentation() {
               )}
             </Button>
           )}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={exportPdf}
+            disabled={isExporting}
+            className="text-foreground hover:bg-[hsl(var(--primary))]/20 disabled:opacity-50"
+            aria-label="Baixar PDF"
+          >
+            {isExporting ? (
+              <Loader2 className="h-5 w-5 animate-spin" />
+            ) : (
+              <Download className="h-5 w-5" />
+            )}
+          </Button>
         </div>
 
         {/* Progress Dots */}
