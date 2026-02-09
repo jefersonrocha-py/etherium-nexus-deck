@@ -13,7 +13,17 @@ const slides = [
   { id: 1, component: Slide1Cover },
   { id: 2, component: Slide2Diagnosis },
   { id: 3, component: Slide3Proposal },
-  { id: 4, component: Slide4Impact },
+  {
+    id: 4,
+    component: Slide4Impact,
+    extraSlides: [
+      { forceExpandedCard: 0 },
+      { forceExpandedCard: 1 },
+      { forceExpandedCard: 2 },
+      { forceExpandedCard: 3 },
+      { forceExpandedCard: 4 },
+    ],
+  },
   { id: 5, component: Slide6Connection },
   { id: 6, component: Slide7Cases },
 ];

@@ -10,6 +10,7 @@ import impactoTangivelBg from "@/assets/impacto-tangivel-bg.png";
 
 interface SlideProps {
   direction: "next" | "prev";
+  forceExpandedCard?: number | null;
 }
 
 const impacts = [
@@ -45,9 +46,12 @@ const impacts = [
   },
 ];
 
-export default function Slide4Impact({ direction }: SlideProps) {
+export default function Slide4Impact({ direction, forceExpandedCard }: SlideProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [expandedCard, setExpandedCard] = useState<number | null>(null);
+
+  const isForced = forceExpandedCard != null;
+  const activeExpanded = isForced ? forceExpandedCard : expandedCard;
 
   useEffect(() => {
     setIsVisible(true);
@@ -98,7 +102,7 @@ export default function Slide4Impact({ direction }: SlideProps) {
                   key={index}
                   onMouseEnter={() => setExpandedCard(index)}
                   className={`relative overflow-hidden rounded-xl transition-all duration-500 cursor-pointer min-h-[180px] sm:min-h-[200px] md:min-h-[220px] ${
-                    expandedCard === index ? "invisible" : "hover:scale-[1.03] hover:shadow-[0_10px_40px_rgba(0,0,0,0.4)]"
+                    activeExpanded === index ? "invisible" : "hover:scale-[1.03] hover:shadow-[0_10px_40px_rgba(0,0,0,0.4)]"
                   } ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
                   style={{ transitionDelay: `${300 + index * 100}ms` }}
                 >
@@ -133,16 +137,16 @@ export default function Slide4Impact({ direction }: SlideProps) {
                 </div>
 
                 {/* Card Expandido - Portal centralizado */}
-                {expandedCard === index && (
+                {activeExpanded === index && (
                   <div
-                    className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8 animate-fade-in"
-                    onMouseLeave={() => setExpandedCard(null)}
+                    className={`${isForced ? "absolute" : "fixed"} inset-0 z-50 flex items-center justify-center p-4 sm:p-8 ${isForced ? "" : "animate-fade-in"}`}
+                    onMouseLeave={isForced ? undefined : () => setExpandedCard(null)}
                   >
                     {/* Backdrop */}
-                    <div className="absolute inset-0 bg-black/70 backdrop-blur-md animate-fade-in" />
+                    <div className={`absolute inset-0 bg-black/70 backdrop-blur-md ${isForced ? "" : "animate-fade-in"}`} />
 
                     {/* Card Expandido */}
-                    <div className="relative w-full max-w-5xl animate-scale-in">
+                    <div className={`relative w-full max-w-5xl ${isForced ? "" : "animate-scale-in"}`}>
                       <div className="relative overflow-hidden rounded-2xl shadow-[0_30px_90px_rgba(0,0,0,0.9)]">
                         {/* Background Image */}
                         <div 
