@@ -6,7 +6,8 @@ import PptxGenJS from "pptxgenjs";
 
 interface SlideConfig {
   id: number;
-  component: React.ComponentType<{ direction: "next" | "prev" }>;
+  component: React.ComponentType<any>;
+  extraSlides?: Record<string, any>[];
 }
 
 export function usePptxExport(slides: SlideConfig[]) {
@@ -29,7 +30,7 @@ export function usePptxExport(slides: SlideConfig[]) {
       container.style.overflow = "hidden";
       document.body.appendChild(container);
 
-      for (let i = 0; i < slides.length; i++) {
+      const renderSlide = async (component: React.ComponentType<any>, props: Record<string, any>) => {
         const slideWrapper = document.createElement("div");
         slideWrapper.style.width = "1920px";
         slideWrapper.style.height = "1080px";
@@ -38,7 +39,7 @@ export function usePptxExport(slides: SlideConfig[]) {
         container.appendChild(slideWrapper);
 
         const root = createRoot(slideWrapper);
-        root.render(createElement(slides[i].component, { direction: "next" as const }));
+        root.render(createElement(component, props));
 
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
@@ -52,12 +53,21 @@ export function usePptxExport(slides: SlideConfig[]) {
         });
 
         const imgData = canvas.toDataURL("image/jpeg", 0.95);
-
         const slide = pptx.addSlide();
         slide.background = { data: imgData };
 
         root.unmount();
         container.removeChild(slideWrapper);
+      };
+
+      for (let i = 0; i < slides.length; i++) {
+        await renderSlide(slides[i].component, { direction: "next" as const });
+
+        if (slides[i].extraSlides) {
+          for (const extraProps of slides[i].extraSlides!) {
+            await renderSlide(slides[i].component, { direction: "next" as const, ...extraProps });
+          }
+        }
       }
 
       document.body.removeChild(container);
