@@ -2,26 +2,23 @@ import { useState, useCallback } from "react";
 import { createElement } from "react";
 import { createRoot } from "react-dom/client";
 import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
+import PptxGenJS from "pptxgenjs";
 
 interface SlideConfig {
   id: number;
   component: React.ComponentType<{ direction: "next" | "prev" }>;
 }
 
-export function usePdfExport(slides: SlideConfig[]) {
+export function usePptxExport(slides: SlideConfig[]) {
   const [isExporting, setIsExporting] = useState(false);
 
-  const exportPdf = useCallback(async () => {
+  const exportPptx = useCallback(async () => {
     if (isExporting) return;
     setIsExporting(true);
 
     try {
-      const pdf = new jsPDF({
-        orientation: "landscape",
-        unit: "px",
-        format: [1920, 1080],
-      });
+      const pptx = new PptxGenJS();
+      pptx.layout = "LAYOUT_WIDE"; // 13.33" x 7.5" (16:9)
 
       const container = document.createElement("div");
       container.style.position = "fixed";
@@ -43,7 +40,6 @@ export function usePdfExport(slides: SlideConfig[]) {
         const root = createRoot(slideWrapper);
         root.render(createElement(slides[i].component, { direction: "next" as const }));
 
-        // Wait for render and images to load
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         const canvas = await html2canvas(slideWrapper, {
@@ -57,24 +53,21 @@ export function usePdfExport(slides: SlideConfig[]) {
 
         const imgData = canvas.toDataURL("image/jpeg", 0.95);
 
-        if (i > 0) {
-          pdf.addPage([1920, 1080], "landscape");
-        }
-
-        pdf.addImage(imgData, "JPEG", 0, 0, 1920, 1080);
+        const slide = pptx.addSlide();
+        slide.background = { data: imgData };
 
         root.unmount();
         container.removeChild(slideWrapper);
       }
 
       document.body.removeChild(container);
-      pdf.save("etheriumtech-apresentacao.pdf");
+      await pptx.writeFile({ fileName: "etheriumtech-apresentacao.pptx" });
     } catch (error) {
-      console.error("Error exporting PDF:", error);
+      console.error("Error exporting PPTX:", error);
     } finally {
       setIsExporting(false);
     }
   }, [slides, isExporting]);
 
-  return { exportPdf, isExporting };
+  return { exportPptx, isExporting };
 }
